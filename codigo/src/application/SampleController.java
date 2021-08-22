@@ -18,6 +18,8 @@ public class SampleController {
     @FXML
     private Button backButton;
     @FXML
+    private Button signInButton;
+    @FXML
     private Label logInIncorreto;
     @FXML
     private TextField logInCPF;
@@ -25,6 +27,11 @@ public class SampleController {
     private PasswordField logInPassword;
 
 
+    public void userSignIn(ActionEvent event) throws IOException {
+        Main m = new Main();
+        m.changeScene("initialScene.fxml");
+    }
+    
     public void backInitialScene(ActionEvent event) throws IOException {
         Main m = new Main();
         m.changeScene("initialScene.fxml");
