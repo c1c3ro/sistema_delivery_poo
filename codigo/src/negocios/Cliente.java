@@ -16,9 +16,10 @@ public class Cliente extends UsuarioAbstrato {
 		this.sacola = new Sacola();
 	}
 	
-	public void adicionarDinheiro(double valor) {
+	public double adicionarDinheiro(double valor) {
+		this.carteira += valor;
 		
-		return;
+		return this.carteira; // retorna o valor atual da carteira após a adição
 	}
 	
 	public void fazerPedido(double valor) {
@@ -26,8 +27,24 @@ public class Cliente extends UsuarioAbstrato {
 		return;
 	}
 	
-	public void atualizarEndereco() {
+	public String atualizarEndereco(String enderecoNovo) {
+		this.endereco = enderecoNovo;
 		
+		return this.endereco; // retorna o endereco após a atualização
+		
+	}
+	
+	// Getters and Setters
+	public String getEndereco() {
+		return this.endereco;
+	}
+	
+	public double getCarteira() {
+		return this.carteira;
+	}
+	
+	public Sacola getSacola() {
+		return this.sacola;
 	}
 
 }

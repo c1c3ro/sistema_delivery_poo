@@ -1,9 +1,7 @@
 package negocios;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import javafx.util.Pair;
+import java.util.Hashtable;
 
 public class Cardapio {
 	
@@ -12,6 +10,6 @@ public class Cardapio {
 	//Hashmap < inteiro: indice da categoria
 	//			inteiro: id do item
 	//			String: nome do item >
-	Map<Pair<Integer, Integer>, String> itensID; 
+	Hashtable<Integer, Item> itensID; 
 
 }
