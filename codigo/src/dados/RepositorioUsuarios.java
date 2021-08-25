@@ -2,14 +2,14 @@ package dados;
 
 import negocios.UsuarioAbstrato;
 
-public interface RepositorioUsuarios {
+public interface RepositorioUsuarios <Usuario extends UsuarioAbstrato> {
 	
-	public void adicionar(UsuarioAbstrato usuario);
+	public void adicionar(Usuario usuario);
 	
-	public void remover(UsuarioAbstrato usuario);
+	public void remover(Usuario usuario);
 	
-	public UsuarioAbstrato conslutar(String cpf);
+	public Usuario consultar(String cpf);
 	
-	public void atualizar(UsuarioAbstrato usuario);
+	public void atualizar(Usuario usuario);
 	
 }
