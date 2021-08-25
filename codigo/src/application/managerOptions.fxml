@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManagerOptions">
+   <top>
+      <AnchorPane prefHeight="97.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="161.0" layoutY="20.0" text="Escolha uma opção:">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="103.0" fitWidth="118.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="103.0" fitWidth="118.0" layoutX="468.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="276.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="restaurantButton" layoutX="163.0" layoutY="79.0" mnemonicParsing="false" onAction="#seeRestaurants" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Aprovar pedidos">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="updateButton" layoutX="163.0" layoutY="160.0" mnemonicParsing="false" onAction="#updateData" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Atualizar cadastro">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="exitButton" layoutX="511.0" layoutY="256.0" mnemonicParsing="false" onAction="#exitToLogIn" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #f2a22c;" text="Sair">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

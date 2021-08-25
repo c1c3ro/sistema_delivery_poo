@@ -20,7 +20,7 @@ public class InitialScene {
     
     public void showManagerScene(ActionEvent event) throws IOException {
         Main m = new Main();
-        m.changeScene("logIn.fxml");
+        m.changeScene("logInManager.fxml");
     }
 	
 }
