@@ -4,6 +4,7 @@ public abstract class UsuarioAbstrato {
 	
 	private String nome;
 	private String senha;
+	private String cpf;
 	
 	public UsuarioAbstrato(String nome, String senha) {
 		this.nome = nome;
@@ -22,6 +23,18 @@ public abstract class UsuarioAbstrato {
 		this.senha = senhaNova;
 		
 		return;
+	}
+	
+	public String getCPF() {
+		
+		return this.cpf;
+		
+	}
+	
+	public String getNome() {
+		
+		return this.nome;
+		
 	}
 
 }
