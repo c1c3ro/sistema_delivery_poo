@@ -32,7 +32,8 @@ public class ClientOptions {
 
     @FXML
     void updateData(ActionEvent event) throws IOException {
-    	System.out.println("hey, do nothing");
+    	Main m = new Main();
+        m.changeScene("updateDataClient.fxml");
     }
     
     @FXML

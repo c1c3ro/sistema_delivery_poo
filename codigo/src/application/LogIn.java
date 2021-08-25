@@ -29,7 +29,7 @@ public class LogIn {
 
     public void userSignIn(ActionEvent event) throws IOException {
         Main m = new Main();
-        m.changeScene("initialScene.fxml");
+        m.changeScene("SignInClient.fxml");
     }
     
     public void backInitialScene(ActionEvent event) throws IOException {
