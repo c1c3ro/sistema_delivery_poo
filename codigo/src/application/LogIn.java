@@ -11,7 +11,7 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class SampleController {
+public class LogIn {
 
     @FXML
     private Button logInButton;
@@ -29,7 +29,7 @@ public class SampleController {
 
     public void userSignIn(ActionEvent event) throws IOException {
         Main m = new Main();
-        m.changeScene("initialScene.fxml");
+        m.changeScene("SignInClient.fxml");
     }
     
     public void backInitialScene(ActionEvent event) throws IOException {
@@ -46,7 +46,7 @@ public class SampleController {
         if(logInCPF.getText().toString().equals("javacoding") && logInPassword.getText().toString().equals("123")) {
             logInIncorreto.setText("Sucesso!");
 
-            m.changeScene("afterLogin.fxml");
+            m.changeScene("clientOptions.fxml");
         }
 
         else if(logInCPF.getText().isEmpty() && logInPassword.getText().isEmpty()) {
