@@ -23,14 +23,16 @@ public class NegociosCliente {
 		}
 	}
 	
-	public void cadastrarCliente(String nome, String cpf, String senha, String endereco) throws ClienteJaExisteException, ErroDesconhecidoNoCadastro {
+	public void cadastrarCliente(String nome, String cpf, String senha, String endereco) throws ClienteJaExisteException {
 		
 		if (this.clienteExiste(cpf)) {
 			throw new ClienteJaExisteException("Cliente já existe!");
 		} else {
 			Cliente novoCliente = new Cliente(nome, cpf, senha, endereco);
-			if (!this.repositorio.adicionar(novoCliente)) {
-				throw new ErroDesconhecidoNoCadastro("Erro desconhecido no cadastro");
+			try {
+				this.repositorio.adicionar(novoCliente);
+			} catch (Exception e) {			
+				throw e;
 			}
 		}
 		
@@ -47,7 +49,7 @@ public class NegociosCliente {
 		if (senha.equals(pass)) {
 			return true; //pode logar
 		} else {
-			return false;
+			return false; // usuario foi encontrado mas senha estava errada
 		}
 		
 	}

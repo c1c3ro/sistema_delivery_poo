@@ -15,16 +15,10 @@ public class RepositorioClientes implements RepositorioUsuarios<Cliente> {
 	}
 
 	@Override
-	public boolean adicionar(Cliente usuario) {
+	public void adicionar(Cliente usuario) {
 		
 		repositorio.add(usuario);
-		
-		if (repositorio.get(repositorio.size()-1).equals(usuario)) {
-			return true;
-		} else {
-			return false;
-		}
-		
+				
 	}
 
 	@Override

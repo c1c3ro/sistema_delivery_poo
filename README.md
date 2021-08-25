@@ -1,27 +1,28 @@
-# Sistema de Delivery - POO
+# Documentação
 
-## Documentação
-
-Vamos colocar aqui a documentação do projeto que estamos fazendo para facilitar a integração entre nossas partes.
+Vou mudar o que tava antes e, em vez de fazer a documentação de todas as funções, vou fazer só dos negócios. Porque são as camadas que cada um tá trabalhando que são mais próximas uma das outras: **negócios** e **fachada**.
 
 **Implementados até agora, temos**
 
-### UsuarioAbstrato
+## NegociosCliente
 
-- Atributos: `private String: nome`, `private String: senha`
-- Parâmetros de inicialização: `String: nome`, `String: senha`
-- É chamada pelas classes `Cliente` e `Gerente` que são suas herdeiras
+### `clienteExiste ( cpf : String ) : boolean`
 
-##### atualizarNome: void (`String: nomeNovo`)
+Retorna `true` se o cliente com o referido CPF já está cadastrado no nosso repositório e `false` caso contrário.
 
-- Troca o nome do usuário para `nomeNovo`
+### `cadastraCliente ( nome : String, cpf : String, senha : String, endereco : String ) : void`
 
-##### atualizarSenha: void (`String: senhaNova`)
+Verifica se o cliente com o referido CPF já existe e: 
 
-- Troca a senha do usuário para `senhaNova`
+* se o cliente já existe, lança uma `ClienteJaExisteException()`
+* caso contrário, tenta realizar o cadastro
+* se der erro no cadastro, lança a Exception
 
-### Cliente `extends UsuarioAbstrato`
+### `matchLoginSenha ( cpf : String, senha : String ) : boolean`
 
-- Atributos: `private String: cpf`, `private String: endereco`, `private double: carteira`, `private Sacola: sacola`
-- Parâmetros de inicialização: `String: nome`, `String: cpf`, `String: senha`, `String: endereco`
-- Exemplo: `new Cliente("João das Neves", "12345678911", "000000", "Rua X Nº 0 Bairro Y")`
+Verifica se o cliente com o referido CPF já existe e:
+
+* se o cliente ainda não existe, lança uma `UsuarioNaoEncontradoException()`
+* caso contrário, pega o usuário com tal CPF do repositório e verifica a sua senha registrada
+* se a senha registrada e a senha passada para a função forem as mesmas, retorna `true`
+* caso contrário, retorna `false`
