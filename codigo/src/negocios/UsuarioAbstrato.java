@@ -36,5 +36,11 @@ public abstract class UsuarioAbstrato {
 		return this.nome;
 		
 	}
+	
+	public String getSenha() {
+		
+		return this.senha;
+		
+	}
 
 }

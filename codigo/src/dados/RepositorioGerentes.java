@@ -15,9 +15,15 @@ public class RepositorioGerentes implements RepositorioUsuarios<Gerente> {
 	}
 
 	@Override
-	public void adicionar(Gerente usuario) {
+	public boolean adicionar(Gerente usuario) {
 		
 		repositorio.add(usuario);
+		
+		if (repositorio.get(repositorio.size()-1).equals(usuario)) {
+			return true;
+		} else {
+			return false;
+		}
 		
 	}
 
