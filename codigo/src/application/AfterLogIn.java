@@ -14,6 +14,6 @@ public class AfterLogIn {
 
     public void userLogOut(ActionEvent event) throws IOException {
         Main m = new Main();
-        m.changeScene("Sample.fxml");
+        m.changeScene("logIn.fxml");
     }
 }

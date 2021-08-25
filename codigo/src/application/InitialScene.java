@@ -15,12 +15,12 @@ public class InitialScene {
     
     public void showClientScene(ActionEvent event) throws IOException {
         Main m = new Main();
-        m.changeScene("Sample.fxml");
+        m.changeScene("logIn.fxml");
     }
     
     public void showManagerScene(ActionEvent event) throws IOException {
         Main m = new Main();
-        m.changeScene("Sample.fxml");
+        m.changeScene("logIn.fxml");
     }
 	
 }
