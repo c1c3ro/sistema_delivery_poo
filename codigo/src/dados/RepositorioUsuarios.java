@@ -4,7 +4,7 @@ import negocios.UsuarioAbstrato;
 
 public interface RepositorioUsuarios <Usuario extends UsuarioAbstrato> {
 	
-	public void adicionar(Usuario usuario);
+	public boolean adicionar(Usuario usuario);
 	
 	public void remover(Usuario usuario);
 	
