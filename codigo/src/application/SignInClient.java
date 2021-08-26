@@ -1,4 +1,5 @@
 package application;
+import fachada.Delivery;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 public class SignInClient {
+
 
     @FXML
     private Button signInButton;
@@ -37,7 +39,7 @@ public class SignInClient {
 
     @FXML
     void checkSignIn(ActionEvent event) throws IOException {
-    	System.out.println("hey, do nothing");
+    	messageLabel.setText("Cadastrado!");
     }
 
 }
