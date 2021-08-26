@@ -9,9 +9,16 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import javafx.scene.Scene;
+import javafx.scene.Node;
+
 import java.io.IOException;
 
+import fachada.Delivery;
+
 public class LogIn {
+	
+	private Delivery fachada = null;
 
     @FXML
     private Button logInButton;
@@ -38,10 +45,18 @@ public class LogIn {
     }
 
     public void userLogIn(ActionEvent event) throws IOException {
+    	
+    	Node node = (Node) event.getSource();
+   	 	Stage stage = (Stage) node.getScene().getWindow();
+   	 	this.fachada = (Delivery) stage.getUserData();
+    	
         checkLogin();
     }
 
     private void checkLogin() throws IOException {
+    	
+    	
+    	
         Main m = new Main();
         if(logInCPF.getText().toString().equals("javacoding") && logInPassword.getText().toString().equals("123")) {
             logInIncorreto.setText("Sucesso!");
