@@ -1,6 +1,5 @@
 package fachada;
 import Exceptions.ClienteJaExisteException;
-import Exceptions.ErroDesconhecidoNoCadastro;
 import Exceptions.UsuarioNaoEncontradoException;
 import negocios.NegociosCliente;
 //import negocios.NegociosGerente;
@@ -19,7 +18,7 @@ public class Delivery {
 		return clientes.clienteExiste(cpf);
 	}
 	
-	public void cadastrarCliente(String nome, String cpf, String senha, String endereco) throws ClienteJaExisteException, ErroDesconhecidoNoCadastro {
+	public void cadastrarCliente(String nome, String cpf, String senha, String endereco) throws ClienteJaExisteException {
 		clientes.cadastrarCliente(nome, cpf, senha, endereco);
 	}
 	

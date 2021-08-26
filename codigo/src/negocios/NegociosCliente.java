@@ -2,7 +2,6 @@ package negocios;
 
 import dados.RepositorioClientes;
 import Exceptions.ClienteJaExisteException;
-import Exceptions.ErroDesconhecidoNoCadastro;
 import Exceptions.UsuarioNaoEncontradoException;
 
 public class NegociosCliente {

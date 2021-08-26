@@ -31,7 +31,7 @@ public class InitialScene {
     		Stage stage = (Stage) node.getScene().getWindow();
     		stage.close();
     		try {
-    		    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("src/application/initialScene.fxml"));
+    		    Parent root = FXMLLoader.load(getClass().getResource("/application/initialScene.fxml"));
     		    stage.setUserData(fachada);
     		    Scene scene = new Scene(root);
     		    stage.setScene(scene);
