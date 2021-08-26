@@ -14,11 +14,10 @@ import javafx.scene.Node;
 
 import java.io.IOException;
 
+import Exceptions.*;
 import fachada.Delivery;
 
 public class LogIn {
-	
-	private Delivery fachada = null;
 
     @FXML
     private Button logInButton;
@@ -34,30 +33,34 @@ public class LogIn {
     private PasswordField logInPassword;
 
 
-    public void userSignIn(ActionEvent event) throws IOException {
+    public void userSignIn(ActionEvent event)  {
         Main m = new Main();
         m.changeScene("SignInClient.fxml");
     }
     
-    public void backInitialScene(ActionEvent event) throws IOException {
+    public void backInitialScene(ActionEvent event) {
         Main m = new Main();
         m.changeScene("initialScene.fxml");
     }
 
-    public void userLogIn(ActionEvent event) throws IOException {
-    	
-    	Node node = (Node) event.getSource();
-   	 	Stage stage = (Stage) node.getScene().getWindow();
-   	 	this.fachada = (Delivery) stage.getUserData();
-    	
+    public void userLogIn(ActionEvent event)  {
         checkLogin();
     }
 
-    private void checkLogin() throws IOException {
-    	
-    	
-    	
-        Main m = new Main();
+    private void checkLogin()  {
+    	Main m = new Main();
+    	FachadaHolder holder = FachadaHolder.getInstance();
+
+    	try {
+	    	if (holder.fachada != null && holder.fachada.matchLoginSenha(logInCPF.getText().toString(), logInPassword.getText().toString())) {
+	    		m.changeScene("clientOptions.fxml");
+	    	} else {
+	    		System.out.println("errou a senha mlr");
+	    	}
+    	} catch (UsuarioNaoEncontradoException e) {
+    		System.out.println("não encontrei mona");
+    	}
+        
         if(logInCPF.getText().toString().equals("javacoding") && logInPassword.getText().toString().equals("123")) {
             logInIncorreto.setText("Sucesso!");
 

@@ -12,7 +12,7 @@ public class AfterLogIn {
     private Button logOutButton;
 
 
-    public void userLogOut(ActionEvent event) throws IOException {
+    public void userLogOut(ActionEvent event) {
         Main m = new Main();
         m.changeScene("logIn.fxml");
     }

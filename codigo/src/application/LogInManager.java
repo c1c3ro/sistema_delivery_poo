@@ -24,21 +24,21 @@ public class LogInManager {
     private PasswordField logInPassword;
 
 
-    public void userSignIn(ActionEvent event) throws IOException {
+    public void userSignIn(ActionEvent event) {
         Main m = new Main();
         m.changeScene("SignInManager.fxml");
     }
     
-    public void backInitialScene(ActionEvent event) throws IOException {
+    public void backInitialScene(ActionEvent event) {
         Main m = new Main();
         m.changeScene("initialScene.fxml");
     }
 
-    public void userLogIn(ActionEvent event) throws IOException {
+    public void userLogIn(ActionEvent event) {
         checkLogin();
     }
 
-    private void checkLogin() throws IOException {
+    private void checkLogin() {
         Main m = new Main();
         if(logInCPF.getText().toString().equals("javacoding") && logInPassword.getText().toString().equals("123")) {
             logInIncorreto.setText("Sucesso!");
