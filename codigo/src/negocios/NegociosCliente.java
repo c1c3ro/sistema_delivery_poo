@@ -15,7 +15,7 @@ public class NegociosCliente {
 	public boolean clienteExiste(String cpf) {
 		Cliente busca = this.repositorio.consultar(cpf);
 		if (busca != null) {
-			System.out.println("Cliente " + busca.getNome() + " com CPF " + busca.getCPF() + " já existe.");
+			System.out.println("Cliente " + busca.getNome() + " com CPF " + busca.getCPF() + " existe.");
 			return true;
 		} else {
 			return false;
