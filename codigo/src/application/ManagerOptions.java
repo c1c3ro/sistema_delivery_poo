@@ -18,19 +18,19 @@ public class ManagerOptions {
     private Button exitButton;
 
     @FXML
-    void seeRestaurants(ActionEvent event) throws IOException {
+    void seeRestaurants(ActionEvent event) {
     	System.out.println("hey, do nothing");
     }
 
 
     @FXML
-    void updateData(ActionEvent event) throws IOException {
+    void updateData(ActionEvent event) {
     	Main m = new Main();
         m.changeScene("updateDataManager.fxml");
     }
     
     @FXML
-    void exitToLogIn(ActionEvent event) throws IOException{
+    void exitToLogIn(ActionEvent event) {
     	Main m = new Main();
         m.changeScene("logInManager.fxml");
     }

@@ -35,6 +35,10 @@ public class Cliente extends UsuarioAbstrato {
 	}
 	
 	// Getters and Setters
+	public String getCPF() {
+		return this.cpf;
+	}
+	
 	public String getEndereco() {
 		return this.endereco;
 	}

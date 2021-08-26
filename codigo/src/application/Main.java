@@ -30,9 +30,13 @@ public class Main extends Application {
 		}
 	}
 	
-	public void changeScene(String fxml) throws IOException {
-        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-        stg.getScene().setRoot(pane);
+	public void changeScene(String fxml) {
+		try {
+	        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
+	        stg.getScene().setRoot(pane);
+		} catch (IOException e) {
+			System.out.println("Ocorreu algum erro de Input/Output!");
+		}
     }
 	
 	public static void main(String[] args) {

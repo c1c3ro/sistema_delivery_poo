@@ -1,6 +1,4 @@
 package application;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -55,37 +53,37 @@ public class Wallet {
     }
     
     @FXML
-    void add100toWallet(ActionEvent event) throws IOException {
+    void add100toWallet(ActionEvent event) {
     	this.moneyStored += 100;
     	updateLabels();
     }
 
     @FXML
-    void add10toWallet(ActionEvent event) throws IOException {
+    void add10toWallet(ActionEvent event) {
     	this.moneyStored += 10;
     	updateLabels();
     }
 
     @FXML
-    void add20toWallet(ActionEvent event) throws IOException {
+    void add20toWallet(ActionEvent event) {
     	this.moneyStored += 20;
     	updateLabels();
     }
 
     @FXML
-    void add50toWallet(ActionEvent event) throws IOException {
+    void add50toWallet(ActionEvent event){
     	this.moneyStored += 50;
     	updateLabels();
     }
 
     @FXML
-    void add5toWallet(ActionEvent event) throws IOException {
+    void add5toWallet(ActionEvent event) {
     	this.moneyStored += 5;
     	updateLabels();
     }
 
     @FXML
-    void backClientOptions(ActionEvent event) throws IOException{
+    void backClientOptions(ActionEvent event){
     	Main m = new Main();
         m.changeScene("clientOptions.fxml");
 

@@ -30,13 +30,13 @@ public class SignInManager {
     private Label messageLabel;
 
     @FXML
-    void backLogIn(ActionEvent event) throws IOException {
+    void backLogIn(ActionEvent event) {
     	Main m = new Main();
         m.changeScene("logInManager.fxml");
     }
 
     @FXML
-    void checkSignIn(ActionEvent event) throws IOException {
+    void checkSignIn(ActionEvent event) {
     	System.out.println("hey, do nothing");
     }
 

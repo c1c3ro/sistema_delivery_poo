@@ -30,27 +30,27 @@ public class UpdateDataManager {
     private Button backButton;
 
     @FXML
-    void backClientOptions(ActionEvent event) throws IOException{
+    void backClientOptions(ActionEvent event) {
     	Main m = new Main();
         m.changeScene("managerOptions.fxml");
     }
 
     @FXML
-    void changeName(ActionEvent event) throws IOException{
+    void changeName(ActionEvent event) {
     	this.dataField = "nome";
     	messageLabel.setText("Digite um nome novo: ");
     	System.out.println("hey, do nothing");
     }
 
     @FXML
-    void changePassword(ActionEvent event) throws IOException{
+    void changePassword(ActionEvent event) {
     	this.dataField = "senha";
     	messageLabel.setText("Digite sua senha nova: ");
     	System.out.println("hey, do nothing");
     }
 
     @FXML
-    void updateAction(ActionEvent event) throws IOException{
+    void updateAction(ActionEvent event) {
     	System.out.println("hey, do nothing");
     	
     	if (this.dataField == null){
