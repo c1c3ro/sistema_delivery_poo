@@ -3,6 +3,7 @@ package negocios;
 import Exceptions.ClienteJaExisteException;
 import Exceptions.UsuarioNaoEncontradoException;
 import dados.RepositorioGerentes;
+import dados.RepositorioRestaurantes;
 
 public class NegociosGerente {
 	
@@ -22,12 +23,13 @@ public class NegociosGerente {
 		}
 	}
 	
-	public void cadastrarGerente(String nome, String cpf, String senha, String restauranteCnpj, String restauranteNome, String restauranteEndereco) throws ClienteJaExisteException {
+	public void cadastrarGerente(String nome, String cpf, String senha, String restauranteCnpj, String restauranteNome, RepositorioRestaurantes repositorioRestaurante) throws ClienteJaExisteException {
 		
 		if (this.gerenteExiste(cpf)) {
 			throw new ClienteJaExisteException("Gerente já existe!");
 		} else {
 			Restaurante novoRestaurante = new Restaurante(restauranteCnpj, restauranteNome);
+			repositorioRestaurante.adicionar(novoRestaurante);
 			Gerente novoGerente = new Gerente(nome, cpf, senha, novoRestaurante);
 			try {
 				this.repositorio.adicionar(novoGerente);
