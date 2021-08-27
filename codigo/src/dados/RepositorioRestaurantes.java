@@ -2,12 +2,17 @@ package dados;
 
 import java.util.ArrayList;
 
-import negocios.Gerente;
 import negocios.Restaurante;
 
 public class RepositorioRestaurantes {
 	
 	private ArrayList<Restaurante> repositorio;
+	
+	public RepositorioRestaurantes() {
+		
+		repositorio = new ArrayList<Restaurante>();
+		
+	}
 	
 	public void adicionar(Restaurante restaurante) {
 		
@@ -24,7 +29,7 @@ public class RepositorioRestaurantes {
 		
 	}
 	
-	Restaurante consultarCnpj(String cnpj) {
+	public Restaurante consultarCnpj(String cnpj) {
 		
 		Restaurante aux = null;
 		
@@ -38,6 +43,23 @@ public class RepositorioRestaurantes {
 		return null;
 		// se retornar null é porque o restaurante não foi encontrado
 		
+	}
+	
+	public ArrayList<Restaurante> restaurantesAbertos() {
+		ArrayList<Restaurante> restaurantesAbertos = new ArrayList<Restaurante>();
+		
+		for (int i = 0; i < this.repositorio.size(); i++) {
+			Restaurante aux = this.repositorio.get(i);
+			if (aux.estaAberto()) {
+				restaurantesAbertos.add(aux);
+			}
+		}
+		
+		return restaurantesAbertos;
+	}
+	
+	public int getQtdRestaurantes() {
+		return this.repositorio.size();
 	}
 
 }

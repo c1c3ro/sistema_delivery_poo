@@ -23,13 +23,13 @@ public class NegociosGerente {
 		}
 	}
 	
-	public void cadastrarGerente(String nome, String cpf, String senha, String restauranteCnpj, String restauranteNome, RepositorioRestaurantes repositorioRestaurante) throws ClienteJaExisteException {
+	public void cadastrarGerente(String nome, String cpf, String senha, String restauranteCnpj, String restauranteNome, NegociosRestaurante negocioRestaurante) throws ClienteJaExisteException {
 		
 		if (this.gerenteExiste(cpf)) {
 			throw new ClienteJaExisteException("Gerente já existe!");
 		} else {
 			Restaurante novoRestaurante = new Restaurante(restauranteCnpj, restauranteNome);
-			repositorioRestaurante.adicionar(novoRestaurante);
+			negocioRestaurante.cadastrarRestaurante(restauranteCnpj, restauranteNome);
 			Gerente novoGerente = new Gerente(nome, cpf, senha, novoRestaurante);
 			try {
 				this.repositorio.adicionar(novoGerente);
@@ -53,6 +53,18 @@ public class NegociosGerente {
 		} else {
 			return false; // usuario foi encontrado mas senha estava errada
 		}
+		
+	}
+	
+	public Restaurante getRestaurante(String cpfDoGerente) throws UsuarioNaoEncontradoException {
+		
+		if (!this.gerenteExiste(cpfDoGerente)) {
+			throw new UsuarioNaoEncontradoException("Gerente não encontrado!");
+		}
+		
+		Gerente gerente = repositorio.consultar(cpfDoGerente);
+		
+		return gerente.getRestaurante();
 		
 	}
 

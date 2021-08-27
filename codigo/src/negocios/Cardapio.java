@@ -25,6 +25,25 @@ public class Cardapio {
 		return itensID.get(ID);
 	}
 	
+	public boolean itemExiste(Item item) {
+		
+		Item aux = null;
+		
+		Enumeration<Integer> IDs = itensID.keys();
+		while (IDs.hasMoreElements()) {
+			int id = IDs.nextElement();
+			
+			aux = itensID.get(id);
+			if (aux.equals(item)) {
+				System.out.println("Item "+aux.getNome()+" com preço "+aux.getValor()+" existe no cardápio");
+				return true;
+			}
+		}
+		
+		return false;
+		
+	}
+	
 	public ArrayList<String> getCategorias() {
 		
 		// retornas as categorias únicas que existem no cardapio

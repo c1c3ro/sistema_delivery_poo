@@ -16,4 +16,8 @@ public class Gerente extends UsuarioAbstrato {
 		return true;
 	}
 
+	
+	public Restaurante getRestaurante() {
+		return restaurante;
+	}
 }
