@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import Exceptions.UsuarioNaoEncontradoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -40,19 +41,18 @@ public class LogInManager {
 
     private void checkLogin() {
         Main m = new Main();
-        if(logInCPF.getText().toString().equals("javacoding") && logInPassword.getText().toString().equals("123")) {
-            logInIncorreto.setText("Sucesso!");
-
-            m.changeScene("managerOptions.fxml");
-        }
-
-        else if(logInCPF.getText().isEmpty() && logInPassword.getText().isEmpty()) {
+        FachadaHolder holder = FachadaHolder.getInstance();
+    	try {
+	    	if (holder.fachada != null && holder.fachada.matchLoginSenhaGerente(logInCPF.getText().toString(), logInPassword.getText().toString())) {
+	    		m.changeScene("managerOptions.fxml");
+	    	} else {
+	    		logInIncorreto.setText("Senha incorreta!");
+	    	}
+    	} catch (UsuarioNaoEncontradoException e) {
+    		logInIncorreto.setText("Usuário não cadastrado!");
+    	}
+        if(logInCPF.getText().isEmpty() || logInPassword.getText().isEmpty()) {
             logInIncorreto.setText("Digite suas informações!");
-        }
-
-
-        else {
-        	logInIncorreto.setText("CPF ou senha incorretos!");
         }
     }
 }

@@ -20,4 +20,8 @@ public class Gerente extends UsuarioAbstrato {
 	public Restaurante getRestaurante() {
 		return restaurante;
 	}
+	
+	public String getCPF() {
+		return this.cpf;
+	}
 }

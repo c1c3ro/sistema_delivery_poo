@@ -52,29 +52,27 @@ public class LogIn {
     	FachadaHolder holder = FachadaHolder.getInstance();
 
     	try {
-	    	if (holder.fachada != null && holder.fachada.matchLoginSenha(logInCPF.getText().toString(), logInPassword.getText().toString())) {
+	    	if (holder.fachada != null && holder.fachada.matchLoginSenhaCliente(logInCPF.getText().toString(), logInPassword.getText().toString())) {
 	    		m.changeScene("clientOptions.fxml");
 	    	} else {
-	    		System.out.println("errou a senha mlr");
+	    		logInIncorreto.setText("Senha incorreta!");
 	    	}
     	} catch (UsuarioNaoEncontradoException e) {
-    		System.out.println("não encontrei mona");
+    		logInIncorreto.setText("Usuário não cadastrado!");
     	}
         
+    	
+    	// esse if é somente para testes, será removido em breve
         if(logInCPF.getText().toString().equals("javacoding") && logInPassword.getText().toString().equals("123")) {
             logInIncorreto.setText("Sucesso!");
 
             m.changeScene("clientOptions.fxml");
         }
 
-        else if(logInCPF.getText().isEmpty() && logInPassword.getText().isEmpty()) {
+        if(logInCPF.getText().isEmpty() || logInPassword.getText().isEmpty()) {
             logInIncorreto.setText("Digite suas informações!");
         }
 
-
-        else {
-        	logInIncorreto.setText("CPF ou senha incorretos!");
-        }
     }
 	
 }
