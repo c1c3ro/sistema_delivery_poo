@@ -47,30 +47,22 @@ public class SignInClient {
 
     @FXML
     void checkSignIn(ActionEvent event) {
-    	
-    	//Node node = (Node) event.getSource();
-   	 	//Stage stage = (Stage) node.getScene().getWindow();
-   	 	//stage.close();	
+    		
  		try {
-		    //Parent root = FXMLLoader.load(getClass().getResource("/application/signInClient.fxml"));
 		    FachadaHolder holder = FachadaHolder.getInstance();
 		    
 		    if (holder.fachada == null) {
 		    	holder.fachada = new Delivery();
 		    }
-		    
-		    holder.fachada.cadastrarCliente(nameField.getText().toString(), cpfField.getText().toString(), passwordField.getText().toString(),
-		    		adressField.getText().toString());
-		    
-		    //Scene scene = new Scene(root);
-		    //stage.setScene(scene);
-		    //stage.show();
-		    
-		  } //catch (IOException e) {
-		    //System.err.println(String.format("Error: %s", e.getMessage()));
-		  //}
+		    if (nameField.getText().isEmpty() || cpfField.getText().isEmpty() || passwordField.getText().isEmpty() || adressField.getText().isEmpty()) {
+		    	messageLabel.setText("Digite todas as informações!");
+		    } else {
+		    	holder.fachada.cadastrarCliente(nameField.getText().toString(), cpfField.getText().toString(), passwordField.getText().toString(),
+		    			adressField.getText().toString());
+		    }
+		  }
  		catch (ClienteJaExisteException e) {
-	 			System.out.println(e.getMessage());
+ 			messageLabel.setText("Cliente já existe!");
 		  }
  		
     	messageLabel.setText("Cadastrado!");
