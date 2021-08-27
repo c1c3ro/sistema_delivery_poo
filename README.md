@@ -27,6 +27,23 @@ Verifica se o cliente com o referido CPF já existe e:
 * se a senha registrada e a senha passada para a função forem as mesmas, retorna `true`
 * caso contrário, retorna `false`
 
+### `adicionaDinheiro ( cpf : String, valor : double ) : double`
+
+Verifica se o cliente com o referido CPF já existe e:
+
+* se o cliente ainda não existe, lança uma `UsuarioNaoEncontradoException()`
+* caso contrário, pega o usuário com tal CPF do repositório e adiciona o valor à carteira
+* se der erro no processo, lança a Exception
+
+### `realizarCompra ( cpf : String ) : double`
+
+Verifica se o cliente com o referido CPF já existe e:
+
+* se o cliente ainda não existe, lança uma `UsuarioNaoEncontradoException()`
+* caso contrário, pega o usuário com tal CPF do repositório, verifica o total da sacola e retira da carteira
+* se der erro nesse processo, retorna a Exception (pode ser uma genérica ou `SemDinheiroException`)
+* se não, retorna o valor atual da carteira depois da compra
+
 ## NegociosGerente
 
 ### `gerenteExiste ( cpf : String ) : boolean`
@@ -72,6 +89,22 @@ Abre o restaurante do gerente especificado
 
 Fecha o restaurante do gerente especificado
 
+### `aprovarPedido ( gerente : Gerente, sacola : Sacola ) : boolean`
+
+Tenta aprovar o pedido referente ao gerente na sacola:
+
+* Se ocorrer alguma exceção, lança ela;
+* Se não encontrar o gerente, lança a exceção `NãoEncontradoException`
+* Se não der nenhum problema, retorna `true` se o pedido foi aprovado com sucesso e `false` caso contrário
+
+### `pesquisarGerentePorRestaurante ( restaurante : Restaurante ) : Gerente`
+
+Tenta encontrar o gerente que corresponde ao restaurante passado.
+
+* Se der alguma exceção, lança ela
+* Se retornar `null`, não encontrou nenhum gerente com o tal restaurante
+* Se encontrar, retornar o objeto `Gerente()` do gerente do restaurante
+
 ## NegociosRestaurante
 
 ### `restauranteExiste ( cnpj : String ) : boolean`
@@ -85,6 +118,13 @@ Verifica se o restaurante já existe:
 * Se o restaurante existir no repositório, lança `JaExisteException`
 * Caso contrário, tenta cadastrar o restaurante
 * Se der alguma Exception, lança Exception
+
+### `ganhos ( cnpj : String ) : double`
+
+Verifica se o restaurante existe:
+
+* Se não existir, lança `NaoEncontradoException`
+* Caso contrário, retorna quanto o restaurante vendeu até o momento
 
 ### `inserirProdutoNoCardapio ( restaurante : Restaurante, nome : String, valor : double, categoria : String, descricao : String ) : void`
 

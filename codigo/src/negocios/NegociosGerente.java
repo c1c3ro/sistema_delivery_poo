@@ -3,7 +3,6 @@ package negocios;
 import Exceptions.ClienteJaExisteException;
 import Exceptions.UsuarioNaoEncontradoException;
 import dados.RepositorioGerentes;
-import dados.RepositorioRestaurantes;
 
 public class NegociosGerente {
 	
@@ -40,18 +39,18 @@ public class NegociosGerente {
 		
 	}
 	
-	public boolean matchLoginSenha(String cpf, String senha) throws UsuarioNaoEncontradoException {
+	public Gerente matchLoginSenha(String cpf, String senha) throws UsuarioNaoEncontradoException {
 		if (!this.gerenteExiste(cpf)) {
 			throw new UsuarioNaoEncontradoException("Gerente não encontrado");
 		}
 		
-		Gerente cliente = this.repositorio.consultar(cpf);
-		String pass = cliente.getSenha();
+		Gerente gerente = this.repositorio.consultar(cpf);
+		String pass = gerente.getSenha();
 		
 		if (senha.equals(pass)) {
-			return true; //pode logar
+			return gerente; //pode logar
 		} else {
-			return false; // usuario foi encontrado mas senha estava errada
+			return null; // usuario foi encontrado mas senha estava errada
 		}
 		
 	}
@@ -82,6 +81,37 @@ public class NegociosGerente {
 		
 		try {
 			gerente.getRestaurante().fechar();
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public boolean aprovarPedido(Gerente gerente, Sacola sacola) throws UsuarioNaoEncontradoException {
+			
+		try {
+			int aprovarPedido = gerente.aprovarPedido(sacola);
+			
+			if (aprovarPedido == -1) {
+				throw new UsuarioNaoEncontradoException("Gerente não encontrado!");
+			} else if (aprovarPedido == 1) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public Gerente pesquisarGerentePorRestaurante(Restaurante restaurante) {
+		
+		try {
+			return this.repositorio.gerentePorRestaurante(restaurante);
+			// retorna null se não encontrou nenhum gerente com tal restaurante
+			// retorna o gerente se encontrar
 		} catch (Exception e) {
 			throw e;
 		}

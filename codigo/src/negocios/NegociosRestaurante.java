@@ -115,5 +115,15 @@ public class NegociosRestaurante {
 		return restaurante.getCardapio().getCategorias();	
 		
 	}
+	
+	public double ganhos(String cnpj) throws UsuarioNaoEncontradoException {
+		if (!this.restauranteExiste(cnpj)) {
+			throw new UsuarioNaoEncontradoException("Restaurante não existe!");
+		}
+		
+		Restaurante restaurante = repositorio.consultarCnpj(cnpj);
+		
+		return restaurante.getReceita();
+	}
 
 }

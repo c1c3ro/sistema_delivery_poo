@@ -22,9 +22,10 @@ public class Cliente extends UsuarioAbstrato {
 		return this.carteira; // retorna o valor atual da carteira após a adição
 	}
 	
-	public void fazerPedido(double valor) {
+	public double fazerPedido(double valor) {
+		this.carteira -= valor;
 		
-		return;
+		return this.carteira;
 	}
 	
 	public String atualizarEndereco(String enderecoNovo) {
