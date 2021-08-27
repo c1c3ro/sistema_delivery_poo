@@ -1,6 +1,7 @@
 package fachada;
 import Exceptions.ClienteJaExisteException;
 import Exceptions.UsuarioNaoEncontradoException;
+import negocios.Cliente;
 import negocios.NegociosCliente;
 //import negocios.NegociosGerente;
 
@@ -22,7 +23,7 @@ public class Delivery {
 		clientes.cadastrarCliente(nome, cpf, senha, endereco);
 	}
 	
-	public boolean matchLoginSenha(String cpf, String senha) throws UsuarioNaoEncontradoException {
+	public Cliente matchLoginSenha(String cpf, String senha) throws UsuarioNaoEncontradoException {
 		return clientes.matchLoginSenha(cpf, senha);
 	}
 	
