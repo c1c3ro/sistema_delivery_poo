@@ -57,6 +57,21 @@ Verifica se o gerente com o referido CPF já existe e:
 * se o gerente ainda não existe, lança uma `UsuarioNaoEncontradoException()`
 * caso contrário, pega o usuário com tal CPF e retorna seu respectivo restaurante
 
+### `getCategorias ( cnpjRestaurante : String ) : ArrayList < String >`
+
+Verifica se o restaurante existe e:
+
+* Se não existir, lança `NaoEncontradoException`
+* Se existir, retorna as categorias únicas no cardápio do restaurante
+
+### `abrirRestaurante ( gerente : Gerente ) : void`
+
+Abre o restaurante do gerente especificado
+
+### `fecharRestaurante ( gerente : Gerente ) : void`
+
+Fecha o restaurante do gerente especificado
+
 ## NegociosRestaurante
 
 ### `restauranteExiste ( cnpj : String ) : boolean`
@@ -98,18 +113,3 @@ Verifica se o restaurante existe e:
 * Se existir, retorna os itens agrupados por categoria em uma `Hashtable< categorias : String, itensDaCategoria : ArrayList < Item > >`
 
 A ideia de ter esse método é para quando o cliente abrir um restaurante para visualizar o cardápio, a gente pegar essa Hashtable e exibir na tela os itens agrupados por categorias, tipo no iFood.
-
-### `getCategorias ( cnpjRestaurante : String ) : ArrayList < String >`
-
-Verifica se o restaurante existe e:
-
-* Se não existir, lança `NaoEncontradoException`
-* Se existir, retorna as categorias únicas no cardápio do restaurante
-
-### `abrirRestaurante ( gerente : Gerente ) : void`
-
-Abre o restaurante do gerente especificado
-
-### `fecharRestaurante ( gerente : Gerente ) : void`
-
-Fecha o restaurante do gerente especificado
