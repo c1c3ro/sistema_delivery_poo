@@ -41,6 +41,13 @@ public class Sacola {
 		return this.setTotal(); // vai retornar total na sacola após a adição do item
 	}
 	
+	public void esvaziarSacola() {
+		itens.clear();
+		aprovacoes.clear();
+		total = 0.0;
+		status = 0;
+	}
+	
 	public double removerItem(Item item, Gerente gerente) throws UsuarioNaoEncontradoException {
 		Restaurante restaurante = gerente.getRestaurante();
 		if (this.itens.containsKey(restaurante)) {
@@ -112,8 +119,6 @@ public class Sacola {
 			this.status = 0;
 			return this.status;
 		}
-		
-		//lembrar de verificar se o numero de restaurantes é maior que 0 nos negocios
 	}
 	
 	public Hashtable<Restaurante, ArrayList<Item>> getItens() {

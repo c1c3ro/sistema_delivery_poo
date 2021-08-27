@@ -1,5 +1,7 @@
 package negocios;
 
+import java.util.ArrayList;
+
 public class Cliente extends UsuarioAbstrato {
 	
 	// Dados do cliente
@@ -7,6 +9,7 @@ public class Cliente extends UsuarioAbstrato {
 	private String endereco;
 	private double carteira;
 	private Sacola sacola;
+	private ArrayList<Sacola> pedidosAntigos;
 	
 	public Cliente(String nome, String cpf, String senha, String endereco) {
 		super(nome, senha);
@@ -14,6 +17,7 @@ public class Cliente extends UsuarioAbstrato {
 		this.endereco = endereco;
 		this.carteira = 0;
 		this.sacola = new Sacola();
+		pedidosAntigos = new ArrayList<Sacola>();
 	}
 	
 	public double adicionarDinheiro(double valor) {
@@ -24,6 +28,9 @@ public class Cliente extends UsuarioAbstrato {
 	
 	public double fazerPedido(double valor) {
 		this.carteira -= valor;
+		
+		pedidosAntigos.add(this.sacola);
+		this.sacola = new Sacola();
 		
 		return this.carteira;
 	}
@@ -50,6 +57,22 @@ public class Cliente extends UsuarioAbstrato {
 	
 	public Sacola getSacola() {
 		return this.sacola;
+	}
+	
+	public ArrayList<Sacola> getPedidosAntigos() {
+		return this.pedidosAntigos;
+	}
+	
+	public Sacola pedidoAtivoMaisRecente() {
+		Sacola pedido = null;
+		for (int i = this.pedidosAntigos.size(); i > 0; i--) {
+			pedido = this.pedidosAntigos.get(i);
+			int pedidoStatus = pedido.getStatus();
+			if (pedidoStatus == 0 || pedidoStatus == 2) {
+				return pedido;
+			}
+		}
+		return null;
 	}
 
 }

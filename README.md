@@ -44,6 +44,63 @@ Verifica se o cliente com o referido CPF já existe e:
 * se der erro nesse processo, retorna a Exception (pode ser uma genérica ou `SemDinheiroException`)
 * se não, retorna o valor atual da carteira depois da compra
 
+### `adicionarItemNaSacola ( cpf : String, item : Item, gerente : Gerente ) : void`
+
+Verifica se o cliente com o referido CPF já existe e:
+
+* se o cliente ainda não existe, lança uma `UsuarioNaoEncontradoException()`
+* caso contrário, pega o usuário com tal CPF do repositório e tenta adicionar o item na sacola
+* se der erro nesse processo, retorna a Exception 
+
+### `removerItemDaSacola ( cpf : String ) : void`
+
+Mesma coisa que o de **adicionar**, mas para **remover**.
+
+### `esvaziarSacola ( cpf : String, item : Item, gerente : Gerente ) : void`
+
+Mesma coisa que o de **remover**, mas remove tudo da sacola e reseta todos os valores da sacola.
+
+### `pedidosAntigos ( cpf : String ) :  ArrayList< Sacola >`
+
+Verifica se o cliente com o referido CPF já existe e:
+
+* se o cliente ainda não existe, lança uma `UsuarioNaoEncontradoException()`
+* Retorna todos os pedidos feitos pelo cliente até o momento
+* Se der erro, lança uma Exceção
+
+### `pedidoAtivoMaisRecente ( cpf: String ) : Sacola`
+
+Mesma coisa que a `pedidosAntigos`, mas retorna só o pedido feito mais recentemente e que ainda está ativo, ou seja:
+
+* Nenhum gerente autorizou os pedidos
+* Falta o(s) gerente(s) de algum(ns) restaurante(s) autorizar algum(ns) pedido(s)
+* Se retornar `null` é porque não existe nenhum pedido ativo
+
+### `getStatusPedidos ( cpf: String ) : int`
+
+Verifica se o cliente com o referido CPF já existe e:
+
+* se o cliente ainda não existe, lança uma `UsuarioNaoEncontradoException()`
+* caso contrário, tenta verificar o status dos seus pedidos
+* se der erro no processo, lança a Exception
+* se não, retorna algum destes valores:
+    * 0 - Nenhum gerente autorizou os pedidos
+    * 1 - Todos os gerentes autorizaram os pedidos
+    * 2 - Alguns gerentes já autorizaram seus pedidos mas outros não
+
+A ideia aqui é que o cliente pode adicionar itens de mais de um restaurante em sua sacola. Asism, os gerentes de todos os restaurantes precisam autorizar o pedido. O status do pedido mostra isso. Dá pra usar o método seguinte para ver os gerentes/restaurantes que autorizaram os pedidos ou não:
+
+### `gerentesQueAutorizaram  ( cpf : String ) : Hashtable < Gerente, Integer >`
+
+Verifica se o cliente com o referido CPF já existe e:
+
+* se o cliente ainda não existe, lança uma `UsuarioNaoEncontradoException()`
+* caso contrário, tenta verificar os gerentes que autorizaram o pedido da Sacola atual
+* se der algum erro, lança a Exception
+* caso contrário, retorna uma Hashtable com os gerentes e seu status de aprovação:
+    * 1 - pedido aprovado pelo gerente
+    * 0 - pedido não aprovado ainda
+
 ## NegociosGerente
 
 ### `gerenteExiste ( cpf : String ) : boolean`
@@ -99,7 +156,7 @@ Tenta aprovar o pedido referente ao gerente na sacola:
 
 ### `pesquisarGerentePorRestaurante ( restaurante : Restaurante ) : Gerente`
 
-Tenta encontrar o gerente que corresponde ao restaurante passado.
+Tenta encontrar o gerente que corresponde ao restaurante passado. **A ideia é usar esse método para encontrar o gerente quando tu só tem o dado do restaurante.**
 
 * Se der alguma exceção, lança ela
 * Se retornar `null`, não encontrou nenhum gerente com o tal restaurante

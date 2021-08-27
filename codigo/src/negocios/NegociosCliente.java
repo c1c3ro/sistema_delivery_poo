@@ -1,6 +1,10 @@
 package negocios;
 
 import dados.RepositorioClientes;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 import Exceptions.ClienteJaExisteException;
 import Exceptions.SemDinheiroException;
 import Exceptions.UsuarioNaoEncontradoException;
@@ -52,6 +56,108 @@ public class NegociosCliente {
 			return null; // usuario foi encontrado mas senha estava errada
 		}
 		
+	}
+	
+	public void adicionarItemNaSacola(String cpf, Item item, Gerente gerente) throws UsuarioNaoEncontradoException {
+		
+		if (!this.clienteExiste(cpf)) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		Cliente cliente = this.repositorio.consultar(cpf);
+		
+		try {
+			cliente.getSacola().adicionarItem(item, gerente);
+		} catch(Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public void removerItemDaSacola(String cpf, Item item, Gerente gerente) throws UsuarioNaoEncontradoException {
+		if (!this.clienteExiste(cpf)) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		Cliente cliente = this.repositorio.consultar(cpf);
+		
+		try {
+			cliente.getSacola().removerItem(item, gerente);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void esvaziarSacola(String cpf) throws UsuarioNaoEncontradoException {
+		if (!this.clienteExiste(cpf)) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		Cliente cliente = this.repositorio.consultar(cpf);
+		
+		try {
+			cliente.getSacola().esvaziarSacola();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public ArrayList<Sacola> pedidosAntigos(String cpf) throws UsuarioNaoEncontradoException {
+		if (!this.clienteExiste(cpf)) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		Cliente cliente = this.repositorio.consultar(cpf);
+		
+		try {
+			return cliente.getPedidosAntigos();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public Sacola pedidoAtivoMaisRecente(String cpf) throws UsuarioNaoEncontradoException {
+		if (!this.clienteExiste(cpf)) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		Cliente cliente = this.repositorio.consultar(cpf);
+		
+		try {
+			return cliente.pedidoAtivoMaisRecente();
+			// retorna null se não houver
+			// retorna o pedido se houver
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public int getStatusPedidos(String cpf) throws UsuarioNaoEncontradoException {
+		if (!this.clienteExiste(cpf)) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		Cliente cliente = this.repositorio.consultar(cpf);
+		
+		try {
+			return cliente.getSacola().getStatus();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public Hashtable<Gerente, Integer> gerentesQueAutorizaram(String cpf) throws UsuarioNaoEncontradoException {
+		if (!this.clienteExiste(cpf)) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		 	
+		Cliente cliente = this.repositorio.consultar(cpf);
+		
+		try {
+			return cliente.getSacola().aprovacoesGerentes();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	public double adicionarDinheiro(String cpf, double valor) throws UsuarioNaoEncontradoException {
