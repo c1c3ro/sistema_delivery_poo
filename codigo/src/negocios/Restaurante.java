@@ -4,14 +4,12 @@ public class Restaurante {
 	
 	private String cnpj;
 	private String nome;
-	private String endereco;
 	public Cardapio cardapio;
 	public boolean aberto;
 	
-	public Restaurante(String cnpj, String nome, String endereco) {
+	public Restaurante(String cnpj, String nome) {
 		this.cnpj = cnpj;
 		this.nome = nome;
-		this.endereco = endereco;
 		this.cardapio = new Cardapio();
 		this.aberto = false;
 	}
@@ -22,10 +20,6 @@ public class Restaurante {
 	
 	public String getNome() {
 		return this.nome;
-	}
-	
-	public String getEndereco() {
-		return this.endereco;
 	}
 	
 	public Cardapio getCardapio() {

@@ -2,6 +2,7 @@ package dados;
 
 import java.util.ArrayList;
 
+import negocios.Cliente;
 import negocios.Gerente;
 
 public class RepositorioGerentes implements RepositorioUsuarios<Gerente> {
@@ -18,6 +19,9 @@ public class RepositorioGerentes implements RepositorioUsuarios<Gerente> {
 	public void adicionar(Gerente usuario) {
 		
 		repositorio.add(usuario);
+		
+		Gerente added = repositorio.get(repositorio.size()-1);
+		System.out.println("Gerente "+added.getNome()+" com CPF "+added.getCPF()+" adicionado");
 		
 	}
 
@@ -36,11 +40,11 @@ public class RepositorioGerentes implements RepositorioUsuarios<Gerente> {
 		for (int i = 0; i < repositorio.size(); i++) {
 			aux = repositorio.get(i);
 			if (aux.getCPF().equals(cpf)) {
-				break;
+				return aux;
 			}
 		}
 		
-		return aux;
+		return null;
 		// se retornar null é porque o cliente não foi encontrado
 		// se retornar uma instancia de Cliente(), o cliente foi encontrado
 	}

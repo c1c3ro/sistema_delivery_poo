@@ -39,7 +39,7 @@ public class NegociosCliente {
 	
 	public boolean matchLoginSenha(String cpf, String senha) throws UsuarioNaoEncontradoException {
 		if (!this.clienteExiste(cpf)) {
-			throw new UsuarioNaoEncontradoException("Usuário não encontrado");
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
 		}
 		
 		Cliente cliente = this.repositorio.consultar(cpf);
