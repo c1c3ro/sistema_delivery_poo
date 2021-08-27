@@ -67,5 +67,25 @@ public class NegociosGerente {
 		return gerente.getRestaurante();
 		
 	}
+	
+	public void abrirRestaurante(Gerente gerente) {
+		
+		try {
+			gerente.getRestaurante().abrir();
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public void fecharRestaurante(Gerente gerente) {
+		
+		try {
+			gerente.getRestaurante().fechar();
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
 
 }

@@ -105,3 +105,11 @@ Verifica se o restaurante existe e:
 
 * Se não existir, lança `NaoEncontradoException`
 * Se existir, retorna as categorias únicas no cardápio do restaurante
+
+### `abrirRestaurante ( gerente : Gerente ) : void`
+
+Abre o restaurante do gerente especificado
+
+### `fecharRestaurante ( gerente : Gerente ) : void`
+
+Fecha o restaurante do gerente especificado
