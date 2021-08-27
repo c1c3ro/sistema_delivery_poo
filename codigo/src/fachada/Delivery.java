@@ -1,22 +1,18 @@
 package fachada;
 import Exceptions.ClienteJaExisteException;
 import Exceptions.UsuarioNaoEncontradoException;
-import negocios.Cliente;
-import negocios.NegociosCliente;
-//import negocios.NegociosGerente;
+
+import negocios.*;
 
 public class Delivery {
 	
 	private NegociosCliente clientes;
-	//private NegociosGerente gerentes;
+	private NegociosGerente gerentes;
+	private NegociosRestaurante restaurantes = null;
 	
 	public Delivery() {
 		this.clientes = new NegociosCliente();
-		//this.gerentes = new NegociosGerente();
-	}
-	
-	public boolean clienteExiste(String cpf) {
-		return clientes.clienteExiste(cpf);
+		this.gerentes = new NegociosGerente();
 	}
 	
 	public void cadastrarCliente(String nome, String cpf, String senha, String endereco) throws ClienteJaExisteException {
@@ -24,7 +20,36 @@ public class Delivery {
 	}
 	
 	public Cliente matchLoginSenha(String cpf, String senha) throws UsuarioNaoEncontradoException {
+	
 		return clientes.matchLoginSenha(cpf, senha);
+	}
+	
+	public void cadastrarGerente(String nome, String cpf, String senha, String restauranteCnpj, String restauranteNome, NegociosRestaurante negocioRestaurante) throws ClienteJaExisteException {
+		gerentes.cadastrarGerente(nome, cpf, senha, restauranteCnpj, restauranteNome, negocioRestaurante);
+	}
+	
+	public Gerente matchLoginSenhaGerente(String cpf, String senha) throws UsuarioNaoEncontradoException {
+		return gerentes.matchLoginSenha(cpf, senha);
+	}
+	
+	public Restaurante getRestaurante(String cpfDoGerente) throws UsuarioNaoEncontradoException {
+		return gerentes.getRestaurante(cpfDoGerente);
+	}
+	
+	public void abrirRestaurante(Gerente gerente) {
+		gerentes.abrirRestaurante(gerente);
+	}
+
+	public void fecharRestaurante(Gerente gerente) {
+		gerentes.fecharRestaurante(gerente);
+	}
+
+	public NegociosRestaurante getRestaurantes() {
+		return restaurantes;
+	}
+
+	public void setRestaurantes(NegociosRestaurante restaurantes) {
+		this.restaurantes = restaurantes;
 	}
 	
 }

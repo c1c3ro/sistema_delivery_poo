@@ -33,30 +33,36 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="113.0" text="Qual nome do seu restaurante?">
+            <Label layoutX="14.0" layoutY="101.0" text="Qual nome do seu restaurante?">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="85.0" layoutY="186.0" text="Qual seu CPF?">
+            <Label layoutX="84.0" layoutY="214.0" text="Qual seu CPF?">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="56.0" layoutY="253.0" text="Informe uma senha:">
+            <Label layoutX="55.0" layoutY="266.0" text="Informe uma senha:">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <TextField fx:id="nameField" layoutX="388.0" layoutY="48.0" promptText="Digite seu nome" />
-            <TextField fx:id="restaurantField" layoutX="388.0" layoutY="116.0" promptText="Digite seu restaurante" />
-            <TextField fx:id="cpfField" layoutX="388.0" layoutY="188.0" promptText="Sem pontos e sem hífen" />
-            <PasswordField fx:id="passwordField" layoutX="389.0" layoutY="256.0" promptText="Digite uma senha" />
-            <Label fx:id="messageLabel" layoutX="278.0" layoutY="14.0" textFill="RED">
+            <TextField fx:id="restaurantField" layoutX="388.0" layoutY="103.0" promptText="Digite seu restaurante" />
+            <TextField fx:id="cpfField" layoutX="388.0" layoutY="216.0" promptText="Sem pontos e sem hífen" />
+            <PasswordField fx:id="passwordField" layoutX="388.0" layoutY="268.0" promptText="Digite uma senha" />
+            <Label fx:id="messageLabel" layoutX="224.0" layoutY="14.0" textFill="RED">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <Label layoutX="14.0" layoutY="156.0" text="Qual o CNPJ do seu restaurante?">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="cnpjField" layoutX="380.0" layoutY="158.0" prefHeight="26.0" prefWidth="165.0" promptText="Sem pontos, barras e hífens" />
          </children>
       </AnchorPane>
    </top>
