@@ -9,7 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import javafx.scene.Scene;
+import javafx.scene.Node;
+
 import java.io.IOException;
+
+import Exceptions.*;
+import fachada.Delivery;
 
 public class LogIn {
 
@@ -27,36 +33,48 @@ public class LogIn {
     private PasswordField logInPassword;
 
 
-    public void userSignIn(ActionEvent event) throws IOException {
+    public void userSignIn(ActionEvent event)  {
         Main m = new Main();
         m.changeScene("SignInClient.fxml");
     }
     
-    public void backInitialScene(ActionEvent event) throws IOException {
+    public void backInitialScene(ActionEvent event) {
         Main m = new Main();
         m.changeScene("initialScene.fxml");
     }
 
-    public void userLogIn(ActionEvent event) throws IOException {
+    public void userLogIn(ActionEvent event)  {
         checkLogin();
     }
 
-    private void checkLogin() throws IOException {
-        Main m = new Main();
+    private void checkLogin()  {
+    	Main m = new Main();
+    	FachadaHolder holder = FachadaHolder.getInstance();
+
+    	try {
+    		var clienteLogado = holder.fachada.matchLoginSenhaCliente(logInCPF.getText().toString(), logInPassword.getText().toString());
+	    	if (holder.fachada != null && clienteLogado != null) {
+	    		holder.setClienteLogado(clienteLogado);
+	    		m.changeScene("clientOptions.fxml");
+	    	} else {
+	    		logInIncorreto.setText("Senha incorreta!");
+	    	}
+    	} catch (UsuarioNaoEncontradoException e) {
+    		logInIncorreto.setText("Usuário não cadastrado!");
+    	}
+        
+    	
+    	// esse if é somente para testes, será removido em breve
         if(logInCPF.getText().toString().equals("javacoding") && logInPassword.getText().toString().equals("123")) {
             logInIncorreto.setText("Sucesso!");
 
             m.changeScene("clientOptions.fxml");
         }
 
-        else if(logInCPF.getText().isEmpty() && logInPassword.getText().isEmpty()) {
+        if(logInCPF.getText().isEmpty() || logInPassword.getText().isEmpty()) {
             logInIncorreto.setText("Digite suas informações!");
         }
 
-
-        else {
-        	logInIncorreto.setText("CPF ou senha incorretos!");
-        }
     }
 	
 }

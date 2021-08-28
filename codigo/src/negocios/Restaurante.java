@@ -4,16 +4,21 @@ public class Restaurante {
 	
 	private String cnpj;
 	private String nome;
-	private String endereco;
 	public Cardapio cardapio;
 	public boolean aberto;
+	private double receita;
+	public Gerente gerente;
 	
-	public Restaurante(String cnpj, String nome, String endereco) {
+	public Restaurante(String cnpj, String nome) {
 		this.cnpj = cnpj;
 		this.nome = nome;
-		this.endereco = endereco;
 		this.cardapio = new Cardapio();
 		this.aberto = false;
+		receita = 0.0;
+	}
+	
+	public double getReceita() {
+		return this.receita;
 	}
 	
 	public String getCnpj() {
@@ -22,10 +27,6 @@ public class Restaurante {
 	
 	public String getNome() {
 		return this.nome;
-	}
-	
-	public String getEndereco() {
-		return this.endereco;
 	}
 	
 	public Cardapio getCardapio() {
@@ -43,6 +44,11 @@ public class Restaurante {
 	public void fechar() {
 		this.aberto = false;
 	}	
+	
+	public double adicionarReceita(double recebido) {
+		this.receita += recebido;
+		return this.receita;
+	}
 	
 
 }

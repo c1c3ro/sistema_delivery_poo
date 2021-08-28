@@ -20,24 +20,24 @@ public class ClientOptions {
     private Button exitButton;
 
     @FXML
-    void seeRestaurants(ActionEvent event) throws IOException {
+    void seeRestaurants(ActionEvent event) {
     	System.out.println("hey, do nothing");
     }
 
     @FXML
-    void seeWallet(ActionEvent event) throws IOException {
+    void seeWallet(ActionEvent event) {
     	Main m = new Main();
         m.changeScene("wallet.fxml");
     }
 
     @FXML
-    void updateData(ActionEvent event) throws IOException {
+    void updateData(ActionEvent event) {
     	Main m = new Main();
         m.changeScene("updateDataClient.fxml");
     }
     
     @FXML
-    void exitToLogIn(ActionEvent event) throws IOException{
+    void exitToLogIn(ActionEvent event) {
     	Main m = new Main();
         m.changeScene("logIn.fxml");
     }

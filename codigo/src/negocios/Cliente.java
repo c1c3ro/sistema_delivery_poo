@@ -1,19 +1,21 @@
 package negocios;
 
+import java.util.ArrayList;
+
 public class Cliente extends UsuarioAbstrato {
 	
 	// Dados do cliente
-	private String cpf;
 	private String endereco;
 	private double carteira;
 	private Sacola sacola;
+	private ArrayList<Sacola> pedidosAntigos;
 	
 	public Cliente(String nome, String cpf, String senha, String endereco) {
-		super(nome, senha);
-		this.cpf = cpf;
+		super(nome, senha, cpf);
 		this.endereco = endereco;
 		this.carteira = 0;
 		this.sacola = new Sacola();
+		pedidosAntigos = new ArrayList<Sacola>();
 	}
 	
 	public double adicionarDinheiro(double valor) {
@@ -22,9 +24,13 @@ public class Cliente extends UsuarioAbstrato {
 		return this.carteira; // retorna o valor atual da carteira após a adição
 	}
 	
-	public void fazerPedido(double valor) {
+	public double fazerPedido(double valor) {
+		this.carteira -= valor;
 		
-		return;
+		pedidosAntigos.add(this.sacola);
+		this.sacola = new Sacola();
+		
+		return this.carteira;
 	}
 	
 	public String atualizarEndereco(String enderecoNovo) {
@@ -35,6 +41,7 @@ public class Cliente extends UsuarioAbstrato {
 	}
 	
 	// Getters and Setters
+	
 	public String getEndereco() {
 		return this.endereco;
 	}
@@ -45,6 +52,22 @@ public class Cliente extends UsuarioAbstrato {
 	
 	public Sacola getSacola() {
 		return this.sacola;
+	}
+	
+	public ArrayList<Sacola> getPedidosAntigos() {
+		return this.pedidosAntigos;
+	}
+	
+	public Sacola pedidoAtivoMaisRecente() {
+		Sacola pedido = null;
+		for (int i = this.pedidosAntigos.size(); i > 0; i--) {
+			pedido = this.pedidosAntigos.get(i);
+			int pedidoStatus = pedido.getStatus();
+			if (pedidoStatus == 0 || pedidoStatus == 2) {
+				return pedido;
+			}
+		}
+		return null;
 	}
 
 }

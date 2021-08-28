@@ -6,9 +6,10 @@ public abstract class UsuarioAbstrato {
 	private String senha;
 	private String cpf;
 	
-	public UsuarioAbstrato(String nome, String senha) {
+	public UsuarioAbstrato(String nome, String senha, String cpf) {
 		this.nome = nome;
 		this.senha = senha;
+		this.cpf = cpf;
 	}
 	
 	public void atualizarNome(String nomeNovo) {
@@ -34,6 +35,12 @@ public abstract class UsuarioAbstrato {
 	public String getNome() {
 		
 		return this.nome;
+		
+	}
+	
+	public String getSenha() {
+		
+		return this.senha;
 		
 	}
 

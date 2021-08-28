@@ -19,6 +19,9 @@ public class RepositorioClientes implements RepositorioUsuarios<Cliente> {
 		
 		repositorio.add(usuario);
 		
+		Cliente added = repositorio.get(repositorio.size()-1);
+		System.out.println("Cliente "+added.getNome()+" com CPF "+added.getCPF()+" adicionado");
+		
 	}
 
 	@Override
@@ -36,11 +39,11 @@ public class RepositorioClientes implements RepositorioUsuarios<Cliente> {
 		for (int i = 0; i < repositorio.size(); i++) {
 			aux = repositorio.get(i);
 			if (aux.getCPF().equals(cpf)) {
-				break;
+				return aux;
 			}
 		}
 		
-		return aux;
+		return null;
 		// se retornar null é porque o cliente não foi encontrado
 		// se retornar uma instancia de Cliente(), o cliente foi encontrado
 	}

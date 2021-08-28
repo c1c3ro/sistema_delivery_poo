@@ -1,6 +1,4 @@
 package application;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -12,7 +10,7 @@ import javafx.util.Duration;
 
 public class Wallet {
 	
-	private double moneyStored = 0.0;
+	private FachadaHolder holder = FachadaHolder.getInstance();
 	
 	@FXML
     private Button fiveButton;
@@ -40,11 +38,13 @@ public class Wallet {
 
     @FXML
     public void initialize() {
-        money.setText("R$ " + this.moneyStored);
+    	
+        money.setText("R$ " + this.holder.getClienteLogado().getCarteira());
+        
     }
     
     private void updateLabels() {
-    	money.setText("R$ " + this.moneyStored);
+    	money.setText("R$ " + this.holder.getClienteLogado().getCarteira());
     	addedLabel.setText("Adicionado!");
     	PauseTransition pause = new PauseTransition(Duration.millis(1000));
         pause.setOnFinished(
@@ -55,37 +55,37 @@ public class Wallet {
     }
     
     @FXML
-    void add100toWallet(ActionEvent event) throws IOException {
-    	this.moneyStored += 100;
+    void add100toWallet(ActionEvent event) {
+    	this.holder.getClienteLogado().adicionarDinheiro(100);
     	updateLabels();
     }
 
     @FXML
-    void add10toWallet(ActionEvent event) throws IOException {
-    	this.moneyStored += 10;
+    void add10toWallet(ActionEvent event) {
+    	this.holder.getClienteLogado().adicionarDinheiro(10);
     	updateLabels();
     }
 
     @FXML
-    void add20toWallet(ActionEvent event) throws IOException {
-    	this.moneyStored += 20;
+    void add20toWallet(ActionEvent event) {
+    	this.holder.getClienteLogado().adicionarDinheiro(20);
     	updateLabels();
     }
 
     @FXML
-    void add50toWallet(ActionEvent event) throws IOException {
-    	this.moneyStored += 50;
+    void add50toWallet(ActionEvent event){
+    	this.holder.getClienteLogado().adicionarDinheiro(50);
     	updateLabels();
     }
 
     @FXML
-    void add5toWallet(ActionEvent event) throws IOException {
-    	this.moneyStored += 5;
+    void add5toWallet(ActionEvent event) {
+    	this.holder.getClienteLogado().adicionarDinheiro(5);
     	updateLabels();
     }
 
     @FXML
-    void backClientOptions(ActionEvent event) throws IOException{
+    void backClientOptions(ActionEvent event){
     	Main m = new Main();
         m.changeScene("clientOptions.fxml");
 

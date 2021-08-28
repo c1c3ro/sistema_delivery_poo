@@ -2,7 +2,6 @@ package application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
 import java.io.IOException;
 
 public class InitialScene {
@@ -13,14 +12,16 @@ public class InitialScene {
     @FXML
     private Button manager_option;
     
-    public void showClientScene(ActionEvent event) throws IOException {
-        Main m = new Main();
+    @FXML
+    public void showClientScene(ActionEvent event) {
+    	Main m = new Main();
         m.changeScene("logIn.fxml");
     }
     
-    public void showManagerScene(ActionEvent event) throws IOException {
+    @FXML
+    public void showManagerScene(ActionEvent event) {
         Main m = new Main();
-        m.changeScene("logIn.fxml");
+        m.changeScene("logInManager.fxml");
     }
 	
 }
