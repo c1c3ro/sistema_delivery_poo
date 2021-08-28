@@ -5,7 +5,7 @@ public class Gerente extends UsuarioAbstrato {
 	private Restaurante restaurante;
 	
 	public Gerente(String nome, String cpf, String senha, Restaurante restaurante) {
-		super(nome, senha);
+		super(nome, senha, cpf);
 		this.restaurante = restaurante;
 	}
 	

@@ -65,6 +65,11 @@ public class SignInManager {
 			    		cnpjField.getText().toString(), restaurantField.getText().toString(), holder.fachada.getRestaurantes());
 			    
 			    messageLabel.setText("Cadastrado!");
+			    nameField.setText("");
+			    cpfField.setText("");
+			    passwordField.setText("");
+			    cnpjField.setText("");
+			    restaurantField.setText("");
 		    }
 		    
 		  } catch (ClienteJaExisteException e) {
