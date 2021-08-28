@@ -59,13 +59,20 @@ public class SignInClient {
 		    } else {
 		    	holder.fachada.cadastrarCliente(nameField.getText().toString(), cpfField.getText().toString(), passwordField.getText().toString(),
 		    			adressField.getText().toString());
+		    	
+		    	 nameField.setText("");
+				 cpfField.setText("");
+				 adressField.setText("");
+				 passwordField.setText("");
+				 
+				 messageLabel.setText("Cadastrado!");
 		    }
 		  }
  		catch (ClienteJaExisteException e) {
  			messageLabel.setText("Cliente já existe!");
 		  }
  		
-    	messageLabel.setText("Cadastrado!");
+    	
     }
 
 }

@@ -9,16 +9,25 @@ import javafx.scene.control.Button;
 public class ManagerOptions {
 	
     @FXML
-    private Button restaurantButton;
+    private Button orderButton;
 
     @FXML
     private Button updateButton;
     
     @FXML
     private Button exitButton;
+    
+    @FXML
+    private Button menuButton;
+    
+    @FXML
+    void updateMenu(ActionEvent event) {
+    	Main m = new Main();
+        m.changeScene("updateMenu.fxml");
+    }
 
     @FXML
-    void seeRestaurants(ActionEvent event) {
+    void approveOrder(ActionEvent event) {
     	System.out.println("hey, do nothing");
     }
 

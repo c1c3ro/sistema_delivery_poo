@@ -52,7 +52,9 @@ public class LogIn {
     	FachadaHolder holder = FachadaHolder.getInstance();
 
     	try {
-	    	if (holder.fachada != null && holder.fachada.matchLoginSenhaCliente(logInCPF.getText().toString(), logInPassword.getText().toString())) {
+    		var clienteLogado = holder.fachada.matchLoginSenhaCliente(logInCPF.getText().toString(), logInPassword.getText().toString());
+	    	if (holder.fachada != null && clienteLogado != null) {
+	    		holder.setClienteLogado(clienteLogado);
 	    		m.changeScene("clientOptions.fxml");
 	    	} else {
 	    		logInIncorreto.setText("Senha incorreta!");

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UpdateMenu">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="344.0" style="-fx-border-color: #f2a22c;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="nameField" layoutX="174.0" layoutY="105.0" promptText="Nome do produto" />
+            <Label layoutX="84.0" layoutY="22.0" text="Adicionar item:">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="descriptionField" layoutX="124.0" layoutY="246.0" prefHeight="85.0" prefWidth="200.0" promptText="Forneça uma breve descrição do produto. Ex.: ingredientes." />
+            <TextField fx:id="valueField" layoutX="174.0" layoutY="152.0" promptText="Exemplo: 19.99" />
+            <TextField fx:id="categoryField" layoutX="174.0" layoutY="200.0" promptText="Categoria do produto" />
+            <Label layoutX="45.0" layoutY="104.0" prefHeight="25.0" prefWidth="96.0" text="Nome:">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="45.0" layoutY="151.0" prefHeight="25.0" prefWidth="96.0" text="Preço:">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="199.0" prefHeight="25.0" prefWidth="96.0" text="Categoria:">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="261.0" prefHeight="25.0" prefWidth="96.0" text="Descrição:">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="addButton" layoutX="97.0" layoutY="342.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="43.0" prefWidth="154.0" style="-fx-background-color: #f2a22c;" text="Adicionar">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Label fx:id="messageALabel" layoutX="84.0" layoutY="67.0" prefHeight="26.0" prefWidth="246.0" textFill="RED">
+               <font>
+                  <Font name="System Bold Italic" size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="306.0" style="-fx-border-color: #f2a22c;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="42.0" layoutY="23.0" text="Remover item:">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button fx:id="removeButton" layoutX="51.0" layoutY="294.0" mnemonicParsing="false" onAction="#removeProduct" prefHeight="43.0" prefWidth="154.0" style="-fx-background-color: #f2a22c;" text="Remover">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <TextField fx:id="IDField" layoutX="53.0" layoutY="200.0" promptText="ID do produto" />
+            <Label layoutX="42.0" layoutY="93.0" prefHeight="106.0" prefWidth="191.0" text="ID do produto (consulte os produtos e cole seu ID):" wrapText="true">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="messageRLabel" layoutX="32.0" layoutY="247.0" prefHeight="27.0" prefWidth="210.0" textFill="RED">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="backButton" layoutX="91.0" layoutY="354.0" mnemonicParsing="false" onAction="#backManagerOptions" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #f2a22c;" text="Voltar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

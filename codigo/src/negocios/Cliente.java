@@ -5,15 +5,13 @@ import java.util.ArrayList;
 public class Cliente extends UsuarioAbstrato {
 	
 	// Dados do cliente
-	private String cpf;
 	private String endereco;
 	private double carteira;
 	private Sacola sacola;
 	private ArrayList<Sacola> pedidosAntigos;
 	
 	public Cliente(String nome, String cpf, String senha, String endereco) {
-		super(nome, senha);
-		this.cpf = cpf;
+		super(nome, senha, cpf);
 		this.endereco = endereco;
 		this.carteira = 0;
 		this.sacola = new Sacola();
@@ -43,9 +41,6 @@ public class Cliente extends UsuarioAbstrato {
 	}
 	
 	// Getters and Setters
-	public String getCPF() {
-		return this.cpf;
-	}
 	
 	public String getEndereco() {
 		return this.endereco;

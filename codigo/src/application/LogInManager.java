@@ -43,7 +43,9 @@ public class LogInManager {
         Main m = new Main();
         FachadaHolder holder = FachadaHolder.getInstance();
     	try {
-	    	if (holder.fachada != null && holder.fachada.matchLoginSenhaGerente(logInCPF.getText().toString(), logInPassword.getText().toString())) {
+    		var gerenteLogado = holder.fachada.matchLoginSenhaGerente(logInCPF.getText().toString(), logInPassword.getText().toString());
+	    	if (holder.fachada != null && gerenteLogado != null) {
+	    		holder.setGerenteLogado(gerenteLogado);
 	    		m.changeScene("managerOptions.fxml");
 	    	} else {
 	    		logInIncorreto.setText("Senha incorreta!");
