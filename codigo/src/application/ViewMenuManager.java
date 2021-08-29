@@ -4,10 +4,9 @@ import negocios.Item;
 import Exceptions.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Hashtable;
-import java.util.List;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -64,14 +63,19 @@ public class ViewMenuManager {
     		
     		itensObs = FXCollections.observableArrayList(itensArray);
     		
-    		nameC.setCellValueFactory(new PropertyValueFactory<Item, String>("Nome"));
-    		valueC.setCellValueFactory(new PropertyValueFactory<Item, Double>("Valor"));
-    		categoryC.setCellValueFactory(new PropertyValueFactory<Item, String>("Categoria"));
-    		descriptionC.setCellValueFactory(new PropertyValueFactory<Item, String>("Descrição"));
+    		//DoubleBinding usedWidth = idC.widthProperty().add(nameC.widthProperty()).add(valueC.widthProperty()).add(categoryC.widthProperty());
+
+    		//descriptionC.prefWidthProperty().bind(menuTable.widthProperty().subtract(usedWidth));
+
+    		
+    		nameC.setCellValueFactory(new PropertyValueFactory<Item, String>("nome"));
+    		valueC.setCellValueFactory(new PropertyValueFactory<Item, Double>("valor"));
+    		categoryC.setCellValueFactory(new PropertyValueFactory<Item, String>("categoria"));
+    		descriptionC.setCellValueFactory(new PropertyValueFactory<Item, String>("descricao"));
     		idC.setCellValueFactory(new PropertyValueFactory<Item, Integer>("ID"));
     		
     		menuTable.setItems(itensObs);
-    	
+    		    	
     	} catch (Exception e) {
     		Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Aviso");
