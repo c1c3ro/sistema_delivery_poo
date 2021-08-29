@@ -45,6 +45,11 @@ public class Restaurante {
 		this.aberto = false;
 	}	
 	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
+	
 	public double adicionarReceita(double recebido) {
 		this.receita += recebido;
 		return this.receita;

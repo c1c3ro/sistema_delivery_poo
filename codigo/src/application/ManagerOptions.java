@@ -1,7 +1,7 @@
 package application;
 
 import java.io.IOException;
-
+import Exceptions.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,6 +25,21 @@ public class ManagerOptions {
     
     @FXML
     private Button openCloseButton;
+    
+    @FXML
+    void initialize() {
+    	FachadaHolder holder = FachadaHolder.getInstance();
+    	try {
+	    	if (holder.fachada.getRestaurante(holder.getGerenteLogado().getCPF()).aberto) {
+	    		openCloseButton.setText("Fechar restaurante");
+	    	} else {
+	    		openCloseButton.setText("Abrir restaurante");
+	    	}
+    	} catch (UsuarioNaoEncontradoException e) {
+    		openCloseButton.setText("ERRO");
+    	}
+    }
+    
     
     @FXML
     void openCloseRestaurant(ActionEvent event) {
