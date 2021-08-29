@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UpdateMenu">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="344.0" style="-fx-border-color: #f2a22c;" BorderPane.alignment="CENTER">
@@ -74,9 +73,9 @@
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="messageRLabel" layoutX="32.0" layoutY="247.0" prefHeight="27.0" prefWidth="210.0" textFill="RED">
+            <Label fx:id="messageRLabel" layoutX="32.0" layoutY="247.0" prefHeight="27.0" prefWidth="216.0" textFill="RED">
                <font>
-                  <Font name="System Bold Italic" size="18.0" />
+                  <Font name="System Bold Italic" size="10.0" />
                </font>
             </Label>
             <Button fx:id="backButton" layoutX="91.0" layoutY="354.0" mnemonicParsing="false" onAction="#backManagerOptions" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #f2a22c;" text="Voltar">

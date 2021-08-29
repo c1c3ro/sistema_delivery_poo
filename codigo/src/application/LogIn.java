@@ -35,14 +35,26 @@ public class LogIn {
     }
 
     public void userLogIn(ActionEvent event)  {
-        checkLogin();
+    	if (!checkLogin()) {
+        	logInIncorreto.setText("Usuário não cadastrado!");
+        }
+        
+        if(logInCPF.getText().isEmpty() || logInPassword.getText().isEmpty()) {
+            logInIncorreto.setText("Digite suas informações!");
+        }
+
     }
 
-    private void checkLogin()  {
+    private boolean checkLogin()  {
     	Main m = new Main();
     	FachadaHolder holder = FachadaHolder.getInstance();
 
     	try {
+    		
+    		if (holder.fachada == null) {
+    			return false;
+    		}
+    		
     		var clienteLogado = holder.fachada.matchLoginSenhaCliente(logInCPF.getText().toString(), logInPassword.getText().toString());
 	    	if (holder.fachada != null && clienteLogado != null) {
 	    		holder.setClienteLogado(clienteLogado);
@@ -53,10 +65,8 @@ public class LogIn {
     	} catch (UsuarioNaoEncontradoException e) {
     		logInIncorreto.setText("Usuário não cadastrado!");
     	}
-
-        if(logInCPF.getText().isEmpty() || logInPassword.getText().isEmpty()) {
-            logInIncorreto.setText("Digite suas informações!");
-        }
+    	
+    	return true;
 
     }
 	
