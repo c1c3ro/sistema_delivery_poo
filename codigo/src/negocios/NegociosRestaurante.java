@@ -92,15 +92,21 @@ public class NegociosRestaurante {
 		// se retornar null não tem nenhum restaurante aberto ou não tem nenhum restaurante cadastrado
 	}
 	
-	public Hashtable<String, ArrayList<Item>> getItensDoCardapio(String cnpj) throws UsuarioNaoEncontradoException {
+	public Hashtable<Integer, Item> getItensDoCardapio(Restaurante restaurante) throws UsuarioNaoEncontradoException {
 		
-		if (!this.restauranteExiste(cnpj)) {
+		if (!this.restauranteExiste(restaurante.getCnpj())) {
 			throw new UsuarioNaoEncontradoException("Restaurante não existe!");
 		}
 		
-		Restaurante restaurante = repositorio.consultarCnpj(cnpj);
+		try {
+			
+			return restaurante.getCardapio().itensPorID();
 		
-		return restaurante.getCardapio().itensPorCategoria();
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
 				
 	}
 	

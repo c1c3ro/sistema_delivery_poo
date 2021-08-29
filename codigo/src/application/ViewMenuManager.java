@@ -41,7 +41,7 @@ public class ViewMenuManager {
     @FXML
     private Button backButton;
     
-    private Collection<ArrayList<Item>> itensCardapio = new ArrayList<>();
+    private Hashtable<Integer, Item> itensCardapio = new Hashtable<Integer, Item>();
     
     private ArrayList<Item> itensArray;
     
@@ -52,10 +52,15 @@ public class ViewMenuManager {
     	FachadaHolder holder = FachadaHolder.getInstance();
     	
     	try {
-    	
-    		itensCardapio = holder.fachada.getItensDoCardapio(holder.getGerenteLogado().getRestaurante().getCnpj()).values();
+
+    		itensCardapio = holder.fachada.getItensDoCardapio(holder.getGerenteLogado().getRestaurante());
     		
-    		itensCardapio.forEach(e -> itensArray.addAll(e));
+    		//System.out.println("itensCardapio size: "+itensCardapio.size());
+    		
+    		itensArray = new ArrayList<Item>();
+    		itensCardapio.forEach((k, e) -> itensArray.add(e));
+    		
+    		//System.out.println("itensArray size: "+itensArray.size());
     		
     		itensObs = FXCollections.observableArrayList(itensArray);
     		
@@ -67,11 +72,14 @@ public class ViewMenuManager {
     		
     		menuTable.setItems(itensObs);
     	
-    	} catch (UsuarioNaoEncontradoException e) {
+    	} catch (Exception e) {
     		Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Aviso");
 			alert.setHeaderText("Tivemos um problema, entre e saia de novo!");
 			alert.show();
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+			//e.printStackTrace();
     	}
     }
     

@@ -100,8 +100,8 @@ public class Delivery {
 		return restaurantes.restaurantesAbertos();
 	}
 	
-	public Hashtable<String, ArrayList<Item>> getItensDoCardapio(String cnpj) throws UsuarioNaoEncontradoException {
-		return restaurantes.getItensDoCardapio(cnpj);
+	public Hashtable<Integer, Item> getItensDoCardapio(Restaurante restaurante) throws UsuarioNaoEncontradoException {
+		return restaurantes.getItensDoCardapio(restaurante);
 	}
 	
 	public ArrayList<String> getCategorias(String cnpj) throws UsuarioNaoEncontradoException {

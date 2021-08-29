@@ -37,6 +37,8 @@ public class Main extends Application {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
+			e.printStackTrace();
+			System.out.println(e.getCause());
 			System.out.println("Algum arquivo não foi encontrado!");
 		}
     }
