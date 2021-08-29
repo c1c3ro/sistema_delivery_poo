@@ -33,12 +33,12 @@
    <center>
       <AnchorPane prefHeight="276.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="orderButton" layoutX="163.0" layoutY="128.0" mnemonicParsing="false" onAction="#approveOrder" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Aprovar pedidos">
+            <Button fx:id="orderButton" layoutX="163.0" layoutY="166.0" mnemonicParsing="false" onAction="#approveOrder" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Aprovar pedidos">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="updateButton" layoutX="163.0" layoutY="209.0" mnemonicParsing="false" onAction="#updateData" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Atualizar cadastro">
+            <Button fx:id="updateButton" layoutX="163.0" layoutY="225.0" mnemonicParsing="false" onAction="#updateData" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Atualizar cadastro">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -48,7 +48,12 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="menuButton" layoutX="163.0" layoutY="51.0" mnemonicParsing="false" onAction="#updateMenu" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Atualizar cardápio">
+            <Button fx:id="menuButton" layoutX="163.0" layoutY="104.0" mnemonicParsing="false" onAction="#updateMenu" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Atualizar cardápio">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="seeMenuButton" layoutX="163.0" layoutY="46.0" mnemonicParsing="false" onAction="#seeMenu" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Ver cardápio">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

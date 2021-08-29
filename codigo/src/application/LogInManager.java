@@ -1,7 +1,5 @@
 package application;
 
-import java.io.IOException;
-
 import Exceptions.UsuarioNaoEncontradoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,6 +51,7 @@ public class LogInManager {
     	} catch (UsuarioNaoEncontradoException e) {
     		logInIncorreto.setText("Usuário não cadastrado!");
     	}
+    	
         if(logInCPF.getText().isEmpty() || logInPassword.getText().isEmpty()) {
             logInIncorreto.setText("Digite suas informações!");
         }
