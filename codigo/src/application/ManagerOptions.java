@@ -24,6 +24,21 @@ public class ManagerOptions {
     private Button seeMenuButton;
     
     @FXML
+    private Button openCloseButton;
+    
+    @FXML
+    void openCloseRestaurant(ActionEvent event) {
+    	FachadaHolder holder = FachadaHolder.getInstance();
+    	if (openCloseButton.getText().toString().equals("Abrir restaurante")) {
+    		holder.fachada.abrirRestaurante(holder.getGerenteLogado());
+    		openCloseButton.setText("Fechar restaurante");
+    	} else {
+    		holder.fachada.fecharRestaurante(holder.getGerenteLogado());
+    		openCloseButton.setText("Abrir restaurante");
+    	}
+    }
+    
+    @FXML
     void seeMenu(ActionEvent event) {
     	Main m = new Main();
         m.changeScene("viewMenuManager.fxml");

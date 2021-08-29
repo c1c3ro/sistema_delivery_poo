@@ -80,7 +80,29 @@ public class UpdateMenu {
 
     @FXML
     void removeProduct(ActionEvent event) {
-    	return;
+    	try {
+    		FachadaHolder holder = FachadaHolder.getInstance();
+    		int id = Integer.parseInt(IDField.getText().toString());
+    		
+    		holder.fachada.removerProdutoDoCardapio(holder.getGerenteLogado().getRestaurante(), id);
+    		
+    		nameField.setText("");
+    		messageRLabel.setText("Removido!");
+    		
+    	} catch (NumberFormatException e) {
+    		if (IDField.getText().toString().isEmpty()) {
+    			messageRLabel.setText("Digite um número!");
+    		} else {
+    			messageRLabel.setText("Digite um ID válido!");
+    		}
+    	} catch (UsuarioNaoEncontradoException e) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setTitle("Aviso");
+			alert.setHeaderText("Tivemos um problema, entre e saia de novo!");
+			alert.show();
+    	} catch (NullPointerException e) {
+    		messageRLabel.setText("Produto não encontrado!");
+    	}
     }
     
     @FXML
