@@ -1,20 +1,14 @@
 package application;
 import fachada.Delivery;
-import java.io.IOException;
 
 import Exceptions.ClienteJaExisteException;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import fachada.Delivery;
-import javafx.scene.Scene;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 
 public class SignInClient {
 
@@ -65,7 +59,10 @@ public class SignInClient {
 				 adressField.setText("");
 				 passwordField.setText("");
 				 
-				 messageLabel.setText("Cadastrado!");
+				 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				 alert.setTitle("Aviso");
+				 alert.setHeaderText("Cliente cadastrado com sucesso!");
+				 alert.show();
 		    }
 		  }
  		catch (ClienteJaExisteException e) {

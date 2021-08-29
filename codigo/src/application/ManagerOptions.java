@@ -21,6 +21,15 @@ public class ManagerOptions {
     private Button menuButton;
     
     @FXML
+    private Button seeMenuButton;
+    
+    @FXML
+    void seeMenu(ActionEvent event) {
+    	Main m = new Main();
+        m.changeScene("viewMenuManager.fxml");
+    }
+    
+    @FXML
     void updateMenu(ActionEvent event) {
     	Main m = new Main();
         m.changeScene("updateMenu.fxml");

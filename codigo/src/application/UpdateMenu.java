@@ -3,6 +3,7 @@ package application;
 import Exceptions.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -66,7 +67,10 @@ public class UpdateMenu {
     		else if (!valueField.getText().toString().isEmpty())
     			messageALabel.setText("Digite o preço com ponto (.), Ex.: 19.49");
     	} catch (UsuarioNaoEncontradoException e) {
-    		messageALabel.setText("Tivemos um problema, saia e entre de novo.");
+    		 Alert alert = new Alert(Alert.AlertType.ERROR);
+			 alert.setTitle("Aviso");
+			 alert.setHeaderText("Tivemos um problema, entre e saia de novo!");
+			 alert.show();
     	} catch (ClienteJaExisteException e) {
     		messageALabel.setText("Este item já existe!");
     	}
