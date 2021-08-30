@@ -50,6 +50,7 @@ public class RepositorioRestaurantes {
 		
 		for (int i = 0; i < this.repositorio.size(); i++) {
 			Restaurante aux = this.repositorio.get(i);
+			System.out.println("Restaurante "+aux.getNome()+" aberto?"+aux.aberto);
 			if (aux.estaAberto()) {
 				restaurantesAbertos.add(aux);
 			}
@@ -59,6 +60,7 @@ public class RepositorioRestaurantes {
 	}
 	
 	public int getQtdRestaurantes() {
+		System.out.println("Quantidade de restaurantes cadastrados: "+this.repositorio.size());
 		return this.repositorio.size();
 	}
 

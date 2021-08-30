@@ -27,12 +27,11 @@ public class NegociosRestaurante {
 		}
 	}
 	
-	public void cadastrarRestaurante(String cnpj, String nome) throws ClienteJaExisteException {
+	public void cadastrarRestaurante(Restaurante novoRestaurante) throws ClienteJaExisteException {
 		
-		if (this.restauranteExiste(cnpj)) {
+		if (this.restauranteExiste(novoRestaurante.getCnpj())) {
 			throw new ClienteJaExisteException("Restaurante já existe!");
 		} else {
-			Restaurante novoRestaurante = new Restaurante(cnpj, nome);
 			try {
 				this.repositorio.adicionar(novoRestaurante);
 			} catch (Exception e) {			

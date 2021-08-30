@@ -79,7 +79,7 @@ public class Cardapio {
 		Hashtable<String, ArrayList<Item>> itensPorCategoria = new Hashtable<String, ArrayList<Item>>();
 		
 		Enumeration<Integer> IDs = itensID.keys();
-		System.out.println("Tamanho itensID :"+itensID.size());
+		//System.out.println("Tamanho itensID :"+itensID.size());
 		System.out.println(IDs);
 		
 		while (IDs.hasMoreElements()) {
@@ -98,7 +98,7 @@ public class Cardapio {
 			}
 		}
 		
-		System.out.println("Tamanhos de itens por Categoria: "+itensPorCategoria.size());
+		//System.out.println("Tamanhos de itens por Categoria: "+itensPorCategoria.size());
 		return itensPorCategoria;
 		
 		

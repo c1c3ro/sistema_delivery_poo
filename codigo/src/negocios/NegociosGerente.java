@@ -28,7 +28,7 @@ public class NegociosGerente {
 			throw new ClienteJaExisteException("Gerente já existe!");
 		} else {
 			Restaurante novoRestaurante = new Restaurante(restauranteCnpj, restauranteNome);
-			negocioRestaurante.cadastrarRestaurante(restauranteCnpj, restauranteNome);
+			negocioRestaurante.cadastrarRestaurante(novoRestaurante);
 			Gerente novoGerente = new Gerente(nome, cpf, senha, novoRestaurante);
 			try {
 				this.repositorio.adicionar(novoGerente);
@@ -71,6 +71,7 @@ public class NegociosGerente {
 		
 		try {
 			gerente.getRestaurante().abrir();
+			System.out.println("Restaurante "+gerente.getRestaurante().getNome()+" está aberto? "+gerente.getRestaurante().aberto);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -81,6 +82,7 @@ public class NegociosGerente {
 		
 		try {
 			gerente.getRestaurante().fechar();
+			System.out.println("Restaurante "+gerente.getRestaurante().getNome()+" está aberto? "+gerente.getRestaurante().aberto);
 		} catch (Exception e) {
 			throw e;
 		}
