@@ -111,6 +111,10 @@ public class Delivery {
 	public double ganhos(String cnpj) throws UsuarioNaoEncontradoException {
 		return restaurantes.ganhos(cnpj);
 	}
+	
+	public Gerente pesquisarGerentePorRestaurante(Restaurante restaurante) {
+		return gerentes.pesquisarGerentePorRestaurante(restaurante);
+	}
 
 	public NegociosRestaurante getRestaurantes() {
 		return restaurantes;

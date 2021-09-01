@@ -56,7 +56,17 @@ public class SeeOpenRestaurants {
 
     @FXML
     void seeMenu(ActionEvent event) {
-
+    	FachadaHolder holder = FachadaHolder.getInstance();
+    	Restaurante restauranteSelecionado = comboR.getSelectionModel().getSelectedItem();
+    	if (restauranteSelecionado == null) {
+    		mainLabel.setText("Selecione um restaurante!");
+    		Color color = Color.RED;
+    		mainLabel.setTextFill(color);
+    	} else {
+    		holder.setRestauranteSelecionado(restauranteSelecionado);
+    		Main m = new Main();
+            m.changeScene("viewMenuClient.fxml");
+    	}
     }
 
 }
