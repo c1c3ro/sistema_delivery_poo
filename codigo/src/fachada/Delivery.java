@@ -112,6 +112,10 @@ public class Delivery {
 		return restaurantes.ganhos(cnpj);
 	}
 	
+	public Item getItemPorID(Restaurante restaurante, int ID) throws UsuarioNaoEncontradoException {
+		return restaurantes.getItemPorID(restaurante, ID);
+	}
+	
 	public Gerente pesquisarGerentePorRestaurante(Restaurante restaurante) {
 		return gerentes.pesquisarGerentePorRestaurante(restaurante);
 	}

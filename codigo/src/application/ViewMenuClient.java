@@ -6,6 +6,7 @@ import Exceptions.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 
 public class ViewMenuClient {
 
@@ -93,28 +95,47 @@ public class ViewMenuClient {
     	try {
     		FachadaHolder holder = FachadaHolder.getInstance();
     		int id = Integer.parseInt(IDField.getText().toString());
+    		int qtd = Integer.parseInt(qtdField.getText().toString());
     		
+    		Item item = holder.fachada.getItemPorID(holder.getRestauranteSelecionado(), id);
     		
+    		System.out.println(item.getID());
     		
-    		//holder.fachada.adicionarItemNaSacola(holder.getClienteLogado().getCPF(), holder., null);
-    		
+    		for (int i = 1; i <= qtd; i++) {
+    			holder.fachada.adicionarItemNaSacola(holder.getClienteLogado().getCPF(), item, holder.fachada.pesquisarGerentePorRestaurante(holder.getRestauranteSelecionado()));
+    		}
     		IDField.setText("");
-    		messageLabel.setText("Removido!");
+    		qtdField.setText("1");
+    		messageLabel.setText("Adicionado!");
+    		emptyLabel();
     		
     	} catch (NumberFormatException e) {
     		if (IDField.getText().toString().isEmpty()) {
-    			messageLabel.setText("Digite um número!");
+    			messageLabel.setText("Digite o ID!");
+    			emptyLabel();
     		} else {
-    			messageLabel.setText("Digite um ID válido!");
+    			messageLabel.setText("Dados Inválidos!");
+    			emptyLabel();
     		}
-    	} catch (UsuarioNaoEncontradoException e) {
+    	} catch (NullPointerException e) {
+    		messageLabel.setText("Produto não encontrado!");
+    		emptyLabel();
+    	} catch (Exception e) {
     		Alert alert = new Alert(Alert.AlertType.ERROR);
     		alert.setTitle("Aviso");
 			alert.setHeaderText("Tivemos um problema, entre e saia de novo!");
 			alert.show();
-    	} catch (NullPointerException e) {
-    		messageLabel.setText("Produto não encontrado!");
     	}
+    }
+    
+    @FXML
+    void emptyLabel() {
+    	PauseTransition pause = new PauseTransition(Duration.millis(1000));
+        pause.setOnFinished(
+            e -> {
+            	messageLabel.setText(" ");
+            });
+        pause.play();
     }
 
     @FXML
@@ -125,7 +146,7 @@ public class ViewMenuClient {
     @FXML
     void backToClientOptions(ActionEvent event) {
     	Main m = new Main();
-        m.changeScene("clientOptions.fxml");
+        m.changeScene("seeOpenRestaurants.fxml");
     }
 
 }
