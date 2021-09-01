@@ -1,6 +1,7 @@
 package negocios;
 
 import Exceptions.ClienteJaExisteException;
+import Exceptions.OpcaoInvalidaException;
 import Exceptions.UsuarioNaoEncontradoException;
 import dados.RepositorioGerentes;
 
@@ -114,6 +115,22 @@ public class NegociosGerente {
 			return this.repositorio.gerentePorRestaurante(restaurante);
 			// retorna null se não encontrou nenhum gerente com tal restaurante
 			// retorna o gerente se encontrar
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public String atualizarGerente(String cpf, int campo, String novoValor) throws UsuarioNaoEncontradoException, OpcaoInvalidaException {
+		
+		Gerente paraAtualizar = this.repositorio.consultar(cpf);
+		
+		if (paraAtualizar == null) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		try {
+			return this.repositorio.atualizar(paraAtualizar, campo, novoValor);
 		} catch (Exception e) {
 			throw e;
 		}

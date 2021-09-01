@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import Exceptions.ClienteJaExisteException;
+import Exceptions.OpcaoInvalidaException;
 import Exceptions.SemDinheiroException;
 import Exceptions.UsuarioNaoEncontradoException;
 
@@ -198,6 +199,22 @@ public class NegociosCliente {
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+	
+	public String atualizarCliente(String cpf, int campo, String novoValor) throws UsuarioNaoEncontradoException, OpcaoInvalidaException {
+		
+		Cliente paraAtualizar = this.repositorio.consultar(cpf);
+		
+		if (paraAtualizar == null) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		try {
+			return this.repositorio.atualizar(paraAtualizar, campo, novoValor);
+		} catch (Exception e) {
+			throw e;
+		}
+		
 	}
 
 }

@@ -101,6 +101,19 @@ Verifica se o cliente com o referido CPF já existe e:
     * 1 - pedido aprovado pelo gerente
     * 0 - pedido não aprovado ainda
 
+### `atualizarCliente( cpf : String, campo : int, novoValor : String) : void`
+
+Verifica se o cliente existe:
+
+* se não existir, lança `NaoEncontradoException`
+* se existir, verifica o valor `campo : int` passado para o método:
+    * 1: atualizar Nome
+    * 2: atualizar Senha
+    * 3: atualizar Endereço
+* se `campo : int` não for nenhuma destas opções acima, lança Exception `OpcaoInvalida`
+* caso contrário, atualiza o atributo correspondente com `novoValor : String`
+* retorna o respectivo campo atualizado
+
 ## NegociosGerente
 
 ### `gerenteExiste ( cpf : String ) : boolean`
@@ -162,6 +175,18 @@ Tenta encontrar o gerente que corresponde ao restaurante passado. **A ideia é u
 * Se retornar `null`, não encontrou nenhum gerente com o tal restaurante
 * Se encontrar, retornar o objeto `Gerente()` do gerente do restaurante
 
+### `atualizarGerente( cpf : String, campo : int, novoValor : String) : String`
+
+Verifica se o gerente existe:
+
+* se não existir, lança `NaoEncontradoException`
+* se existir, verifica o valor `campo : int` passado para o método:
+    * 1: atualizar Nome
+    * 2: atualizar Senha
+* se `campo : int` não for nenhuma destas opções acima, lança Exception `OpcaoInvalida`
+* caso contrário, atualiza o atributo correspondente com `novoValor : String`.
+* retorna o respectivo campo atualizado
+
 ## NegociosRestaurante
 
 ### `restauranteExiste ( cnpj : String ) : boolean`
@@ -202,11 +227,19 @@ Se existir mais de 1 restaurante cadastrado, vai retornar uma `ArrayList` com os
 
 Se não existir nenhum restaurante cadastrado, retorna `null`
 
-### `getItensDoCardapio ( cnpjRestaurante : String ) : Hashtable < String, ArrayList < Item > >`
+### `getItensDoCardapio ( restaurante : Restaurante ) : Hashtable < Integer, Item >`
 
 Verifica se o restaurante existe e:
 
 * Se não existir, lança `NaoEncontradoException`
-* Se existir, retorna os itens agrupados por categoria em uma `Hashtable< categorias : String, itensDaCategoria : ArrayList < Item > >`
+* Se existir, retorna os itens agrupados por categoria em uma `Hashtable< ID : Integer, Item : Item >`
 
 A ideia de ter esse método é para quando o cliente abrir um restaurante para visualizar o cardápio, a gente pegar essa Hashtable e exibir na tela os itens agrupados por categorias, tipo no iFood.
+
+### `getItemPorID ( restaurante : Restaurante, ID : int ) : Item`
+
+Verifica se o restaurante existe e:
+
+* Se não existir, lança `NaoEncontradoException`
+* Se existir, pesquisa o ID do item no Cardápio do restaurante e retorna o item encontrado.
+* Se não encontrar o item, lança Exception.
