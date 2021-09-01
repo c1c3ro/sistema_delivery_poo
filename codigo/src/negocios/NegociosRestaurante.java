@@ -130,5 +130,17 @@ public class NegociosRestaurante {
 		
 		return restaurante.getReceita();
 	}
+	
+	public Item getItemPorID(Restaurante restaurante, int ID) throws UsuarioNaoEncontradoException {
+		if (!this.restauranteExiste(restaurante.getCnpj())) {
+			throw new UsuarioNaoEncontradoException("Restaurante não existe!");
+		}
+		
+		try {
+			return restaurante.getCardapio().getItem(ID);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 
 }
