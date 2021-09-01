@@ -2,13 +2,25 @@ package application;
 import fachada.Delivery;
 import negocios.Cliente;
 import negocios.Gerente;
+import negocios.Restaurante;
 
 public final class FachadaHolder {
 	
+	Delivery fachada = null;
 	private Cliente clienteLogado;
 	private Gerente gerenteLogado;
-	Delivery fachada = null;
+	private Restaurante restauranteSelecionado;
 	
+	public Restaurante getRestauranteSelecionado() {
+		return restauranteSelecionado;
+	}
+
+
+	public void setRestauranteSelecionado(Restaurante restauranteSelecionado) {
+		this.restauranteSelecionado = restauranteSelecionado;
+	}
+
+
 	private final static FachadaHolder INSTANCE = new FachadaHolder();
 
 	private FachadaHolder() {}
