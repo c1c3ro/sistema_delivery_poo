@@ -102,6 +102,14 @@ public class Delivery {
 		return gerentes.atualizarGerente(cpf, campo, novoValor);
 	}
 	
+	public boolean aprovarPedido(Gerente gerente, Sacola sacola) throws UsuarioNaoEncontradoException {
+		return gerentes.aprovarPedido(gerente, sacola);
+	}
+	
+	public Hashtable<Sacola, ArrayList<Item>> getPedidosParaAprovacao(Gerente gerente) throws UsuarioNaoEncontradoException {
+		return gerentes.getPedidosParaAprovacao(gerente);
+	}
+	
 	public Restaurante getRestaurante(String cpfDoGerente) throws UsuarioNaoEncontradoException {
 		return gerentes.getRestaurante(cpfDoGerente);
 	}
