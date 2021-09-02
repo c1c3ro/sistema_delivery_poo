@@ -106,6 +106,7 @@ public class clientBag {
     		alert.setTitle("Sucesso");
 			alert.setHeaderText("Enviamos seu pedido para o(s) gerente(s), quando aprovado, o pedido chegará no seu endereço!");
 			alert.show();
+			initialize();
 
     	} catch (SemDinheiroException e) {
     		messageLabel.setText("Dinheiro insuficiente!");
@@ -137,8 +138,8 @@ public class clientBag {
     		
     		IDField.setText("");
     		messageLabel.setText("Removido!");
-    		initialize();
     		emptyLabel();
+    		initialize();
     		
     	} catch (NumberFormatException e) {
     		if (IDField.getText().toString().isEmpty()) {
