@@ -140,7 +140,8 @@ public class ViewMenuClient {
 
     @FXML
     void seeBag(ActionEvent event) {
-    	return;
+    	Main m = new Main();
+        m.changeScene("clientBag.fxml");
     }
     
     @FXML
