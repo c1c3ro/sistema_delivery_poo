@@ -2,6 +2,11 @@ package negocios;
 
 import dados.RepositorioClientes;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -12,12 +17,14 @@ import Exceptions.SemDinheiroException;
 import Exceptions.UsuarioNaoEncontradoException;
 import Exceptions.SacolaVaziaException;
 
-public class NegociosCliente {
+public class NegociosCliente implements Serializable {
 	
 	RepositorioClientes repositorio;
+	private String filename;
 	
 	public NegociosCliente() {
 		this.repositorio = new RepositorioClientes();
+		filename = "NegociosCliente.ser";
 	}
 	
 	public boolean clienteExiste(String cpf) {
@@ -279,6 +286,34 @@ public class NegociosCliente {
 		}
 		try {
 			return sacola.getTotal();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void saveData() throws Exception {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream(filename);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(this);
+			
+			out.close();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public NegociosCliente readData() throws Exception {
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			NegociosCliente objeto = (NegociosCliente) in.readObject();
+			in.close();
+			return objeto;
 		} catch (Exception e) {
 			throw e;
 		}

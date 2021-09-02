@@ -1,5 +1,10 @@
 package negocios;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -7,13 +12,15 @@ import Exceptions.ClienteJaExisteException;
 import Exceptions.UsuarioNaoEncontradoException;
 import dados.RepositorioRestaurantes;
 
-public class NegociosRestaurante {
+public class NegociosRestaurante implements Serializable {
 	
 	public RepositorioRestaurantes repositorio;
+	private String filename;
 	
 	public NegociosRestaurante() {
 		
 		repositorio = new RepositorioRestaurantes();
+		filename = "NegociosRestaurante.ser";
 		
 	}
 	
@@ -138,6 +145,34 @@ public class NegociosRestaurante {
 		
 		try {
 			return restaurante.getCardapio().getItem(ID);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void saveData() throws Exception {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream(filename);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(this);
+			
+			out.close();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public NegociosRestaurante readData() throws Exception {
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			NegociosRestaurante objeto = (NegociosRestaurante) in.readObject();
+			in.close();
+			return objeto;
 		} catch (Exception e) {
 			throw e;
 		}
