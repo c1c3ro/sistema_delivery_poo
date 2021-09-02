@@ -59,7 +59,7 @@ public class Restaurante {
 	}
 	
 	public void adicionarPedido(ArrayList<Item> pedido) {
-		int id = this.pedidos.size();
+		int id = this.pedidos.size()+1;
 		this.pedidos.put(id, pedido);
 	}
 

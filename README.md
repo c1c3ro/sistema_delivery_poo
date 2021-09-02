@@ -121,13 +121,17 @@ Verifica se o cliente existe:
 * se não existir, lança `NaoEncontradoException`
 * retorna o objeto `Sacola()` do cliente ou uma Exception caso dê algum erro
 
-### `getItensNaSacola( sacola : Sacola ) : Hashtable < Restaurante, ArrayList< Item > >`
+### `getItensNaSacolaPorRestaurante( sacola : Sacola ) : Hashtable < Restaurante, ArrayList< Item > >`
 
 A ideia é utilizar o `getSacolaAtual()` ou `pedidosAntigos()` para pegar a(s) sacola(s) e aí passar ela(s) para esse método para pegar a lista de itens agrupada por restaurantes (na sacola pode ter itens de mais de um restaurante). O método funciona assim:
 
 * verifica se a Sacola está vazia. Se sim, lança `SacolaVaziaException`
 * se não, retorna uma `Hashtable` onde as chaves são os Restaurantes de onde os pedidos foram realizados, e os itens são uma `ArrayList` com os itens que foram comprados do respectivo restaurante.
 * se der algum erro no processo, lança a Exception.
+
+### `getItensNaSacola( sacola : Sacola ) : ArrayList< Item >`
+
+Mesma coisa que o de cima, mas retorna uma `ArrayList` com os itens da Sacola.
 
 ### `getTotalSacola( sacola : Sacola ) : double`
 

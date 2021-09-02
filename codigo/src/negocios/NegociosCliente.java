@@ -3,6 +3,7 @@ package negocios;
 import dados.RepositorioClientes;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import Exceptions.ClienteJaExisteException;
@@ -236,12 +237,37 @@ public class NegociosCliente {
 		
 	}
 	
-	public Hashtable<Restaurante, ArrayList<Item>> getItensNaSacola(Sacola sacola) throws SacolaVaziaException {
+	public Hashtable<Restaurante, ArrayList<Item>> getItensNaSacolaPorRestaurante(Sacola sacola) throws SacolaVaziaException {
 		if (sacola.getQtdItens() == 0) {
 			throw new SacolaVaziaException("A sacola está vazia");
 		}
 		try {
 			return sacola.getItens();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public ArrayList<Item> getItensNaSacola(Sacola sacola) throws SacolaVaziaException {
+		if (sacola.getQtdItens() == 0) {
+			throw new SacolaVaziaException("A sacola está vazia");
+		}
+		try {
+			Hashtable<Restaurante, ArrayList<Item>> itensPorRestaurante = sacola.getItens();
+			if (itensPorRestaurante.size() == 0) {
+				throw new SacolaVaziaException("itensPorRestaurante está vazio");
+			}
+			ArrayList<Item> itensNaSacola = new ArrayList<Item>();
+			Enumeration<Restaurante> restaurantes = itensPorRestaurante.keys();
+			Restaurante aux = null;
+			while (restaurantes.hasMoreElements()) {
+				aux = restaurantes.nextElement();
+				ArrayList<Item> itens = itensPorRestaurante.get(aux);
+				for (int i = 0; i < itens.size(); i++) {
+					itensNaSacola.add(itens.get(i));
+				}
+			}
+			return itensNaSacola;
 		} catch (Exception e) {
 			throw e;
 		}
