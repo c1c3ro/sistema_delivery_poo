@@ -1,8 +1,8 @@
 package application;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-
+import java.util.Set;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,8 +13,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 import negocios.Item;
+import negocios.Restaurante;
 import negocios.Sacola;
+import Exceptions.*;
 
 public class clientBag {
 
@@ -48,8 +51,6 @@ public class clientBag {
     @FXML
     private Label walletLabel;
     
-    private Hashtable<Integer, Item> itensSacola = new Hashtable<Integer, Item>();
-    
     private ArrayList<Item> itensArray;
     
     private ObservableList<Item> itensObs;
@@ -59,14 +60,12 @@ public class clientBag {
     public void initialize() {
     	FachadaHolder holder = FachadaHolder.getInstance();
     	try {
-
-    		
     		Sacola sacola = holder.fachada.getSacolaAtual(holder.getClienteLogado().getCPF());
     		
-    		//itensSacola = holder.fachada.getItensNaSacola(sacola);
+    		totalLabel.setText("Total R$: " + holder.fachada.getTotalSacola(sacola));
+    		walletLabel.setText("Carteira R$: " + holder.getClienteLogado().getCarteira());
     		
-    		itensArray = new ArrayList<Item>();
-    		itensSacola.forEach((k, e) -> itensArray.add(e));
+    		itensArray = holder.fachada.getItensNaSacola(sacola);
     		
     		itensObs = FXCollections.observableArrayList(itensArray);
 
@@ -81,7 +80,7 @@ public class clientBag {
     	} catch (Exception e) {
     		Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Aviso");
-			alert.setHeaderText("Tivemos um problema, entre e saia de novo!");
+			alert.setHeaderText("Tivemos um problema, saia e entre de novo!");
 			alert.show();
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
@@ -91,17 +90,85 @@ public class clientBag {
     
     @FXML
     void backToMenu(ActionEvent event) {
-
+    	Main m = new Main();
+        m.changeScene("viewMenuClient.fxml");
     }
 
     @FXML
     void makeOrder(ActionEvent event) {
+    	FachadaHolder holder = FachadaHolder.getInstance();
+    	try {
+    		holder.fachada.realizarCompra(holder.getClienteLogado().getCPF());
+    		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    		alert.setTitle("Sucesso");
+			alert.setHeaderText("Enviamos seu pedido para o(s) gerente(s), quando aprovado, o pedido chegará no seu endereço!");
+			alert.show();
 
+    	} catch (SemDinheiroException e) {
+    		messageLabel.setText("Dinheiro insuficiente!");
+    	} catch (UsuarioNaoEncontradoException e) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setTitle("Aviso");
+			alert.setHeaderText("Tivemos um problema, saia e entre de novo!");
+			alert.show();
+    	}
     }
 
     @FXML
     void removeFromBag(ActionEvent event) {
-
+    	try {
+    		FachadaHolder holder = FachadaHolder.getInstance();
+    		int id = Integer.parseInt(IDField.getText().toString());
+    		
+    		Set<Restaurante> restaurantes = holder.fachada.getItensNaSacolaPorRestaurante(holder.fachada.getSacolaAtual(holder.getClienteLogado().getCPF())).keySet();
+    		
+    		Item item = null;
+    		for (Restaurante restaurante : restaurantes) {
+    			item = holder.fachada.getItemPorID(restaurante, id);
+    			if (item != null) {
+    				holder.fachada.removerItemDaSacola(holder.getClienteLogado().getCPF(), item, holder.fachada.pesquisarGerentePorRestaurante(restaurante));
+    				break;
+    			}
+    		}
+    		System.out.println(item.getID());
+    		
+    		IDField.setText("");
+    		messageLabel.setText("Removido!");
+    		initialize();
+    		emptyLabel();
+    		
+    	} catch (NumberFormatException e) {
+    		if (IDField.getText().toString().isEmpty()) {
+    			messageLabel.setText("Digite o ID!");
+    			emptyLabel();
+    		} else {
+    			messageLabel.setText("Dados Inválidos!");
+    			emptyLabel();
+    		}
+    	} catch (NullPointerException e) {
+    		messageLabel.setText("Produto não encontrado!");
+    		emptyLabel();
+    	} catch (SacolaVaziaException e) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setTitle("Aviso");
+			alert.setHeaderText("A sacola está vazia, adicione produtos!");
+			alert.show();
+    	} catch (Exception e) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setTitle("Aviso");
+			alert.setHeaderText("Tivemos um problema, saia e entre de novo!");
+			alert.show();
+    	}
+    }
+    
+    @FXML
+    void emptyLabel() {
+    	PauseTransition pause = new PauseTransition(Duration.millis(1000));
+        pause.setOnFinished(
+            e -> {
+            	messageLabel.setText(" ");
+            });
+        pause.play();
     }
 
 }

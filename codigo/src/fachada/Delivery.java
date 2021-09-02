@@ -76,7 +76,11 @@ public class Delivery {
 		return clientes.getSacolaAtual(cpf);
 	}
 	
-	public Hashtable<Restaurante, ArrayList<Item>> getItensNaSacola(Sacola sacola) throws SacolaVaziaException {
+	public Hashtable<Restaurante, ArrayList<Item>> getItensNaSacolaPorRestaurante(Sacola sacola) throws SacolaVaziaException {
+		return clientes.getItensNaSacolaPorRestaurante(sacola);
+	}
+	
+	public ArrayList<Item> getItensNaSacola(Sacola sacola) throws SacolaVaziaException {
 		return clientes.getItensNaSacola(sacola);
 	}
 	
@@ -92,6 +96,10 @@ public class Delivery {
 	
 	public Gerente matchLoginSenhaGerente(String cpf, String senha) throws UsuarioNaoEncontradoException {
 		return gerentes.matchLoginSenha(cpf, senha);
+	}
+	
+	public String atualizarGerente(String cpf, int campo, String novoValor) throws UsuarioNaoEncontradoException, OpcaoInvalidaException {
+		return gerentes.atualizarGerente(cpf, campo, novoValor);
 	}
 	
 	public Restaurante getRestaurante(String cpfDoGerente) throws UsuarioNaoEncontradoException {
