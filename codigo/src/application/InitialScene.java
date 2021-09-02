@@ -31,7 +31,7 @@ public class InitialScene {
     }
     
     @FXML
-    void loadData(ActionEvent event) {
+    void saveData(ActionEvent event) {
     	try {
     		holder.fachada.getRestaurantes().saveData();
     		holder.fachada.getClientes().saveData();
@@ -46,9 +46,9 @@ public class InitialScene {
     }
 
     @FXML
-    void saveData(ActionEvent event) {
+    void loadData(ActionEvent event) {
     	try {
-    		holder.fachada.setRestaurantes(holder.fachada.getRestaurantes().readData()); ;
+    		holder.fachada.setRestaurantes(holder.fachada.getRestaurantes().readData());
     		holder.fachada.setClientes(holder.fachada.getClientes().readData());
     		holder.fachada.setGerentes(holder.fachada.getGerentes().readData());
     		messageLabel.setText("Sucesso!");

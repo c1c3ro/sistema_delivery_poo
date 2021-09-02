@@ -1,9 +1,10 @@
 package negocios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class Restaurante {
+public class Restaurante implements Serializable {
 	
 	private String cnpj;
 	private String nome;
@@ -18,6 +19,7 @@ public class Restaurante {
 		this.cardapio = new Cardapio();
 		this.aberto = false;
 		receita = 0.0;
+		this.pedidos = new Hashtable<Integer, ArrayList<Item>>();
 	}
 	
 	public double getReceita() {

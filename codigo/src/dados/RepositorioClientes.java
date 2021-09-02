@@ -1,12 +1,13 @@
 package dados;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Exceptions.OpcaoInvalidaException;
 
 import negocios.Cliente;
 
-public class RepositorioClientes implements RepositorioUsuarios<Cliente> {
+public class RepositorioClientes implements RepositorioUsuarios<Cliente>, Serializable {
 	
 	private ArrayList<Cliente> repositorio;
 	

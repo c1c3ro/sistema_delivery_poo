@@ -1,5 +1,6 @@
 package dados;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Exceptions.OpcaoInvalidaException;
@@ -8,7 +9,7 @@ import negocios.Cliente;
 import negocios.Gerente;
 import negocios.Restaurante;
 
-public class RepositorioGerentes implements RepositorioUsuarios<Gerente> {
+public class RepositorioGerentes implements RepositorioUsuarios<Gerente>, Serializable {
 	
 	private ArrayList<Gerente> repositorio;
 	

@@ -1,10 +1,11 @@
 package negocios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-public class Cardapio {
+public class Cardapio implements Serializable {
 	
 	public Hashtable<Integer, Item> itensID; 
 	

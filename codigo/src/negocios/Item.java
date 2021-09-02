@@ -1,8 +1,9 @@
 package negocios;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Item {
+public class Item implements Serializable {
 	
 	public String nome;
 	public double valor;
