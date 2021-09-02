@@ -9,6 +9,7 @@ import Exceptions.ClienteJaExisteException;
 import Exceptions.OpcaoInvalidaException;
 import Exceptions.SemDinheiroException;
 import Exceptions.UsuarioNaoEncontradoException;
+import Exceptions.SacolaVaziaException;
 
 public class NegociosCliente {
 	
@@ -215,6 +216,44 @@ public class NegociosCliente {
 			throw e;
 		}
 		
+	}
+	
+	public Sacola getSacolaAtual(String cpf) throws UsuarioNaoEncontradoException {
+		
+		Cliente cliente = this.repositorio.consultar(cpf);
+		
+		if (cliente == null) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		try {
+			return cliente.getSacola();
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public Hashtable<Restaurante, ArrayList<Item>> getItensNaSacola(Sacola sacola) throws SacolaVaziaException {
+		if (sacola.getQtdItens() == 0) {
+			throw new SacolaVaziaException("A sacola está vazia");
+		}
+		try {
+			return sacola.getItens();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public double getTotalSacola(Sacola sacola) throws SacolaVaziaException {
+		if (sacola.getQtdItens() == 0) {
+			throw new SacolaVaziaException("A sacola está vazia");
+		}
+		try {
+			return sacola.getTotal();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

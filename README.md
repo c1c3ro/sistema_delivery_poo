@@ -114,6 +114,25 @@ Verifica se o cliente existe:
 * caso contrário, atualiza o atributo correspondente com `novoValor : String`
 * retorna o respectivo campo atualizado
 
+### `getSacolaAtual( cpf : String ) : Sacola`
+
+Verifica se o cliente existe:
+
+* se não existir, lança `NaoEncontradoException`
+* retorna o objeto `Sacola()` do cliente ou uma Exception caso dê algum erro
+
+### `getItensNaSacola( sacola : Sacola ) : Hashtable < Restaurante, ArrayList< Item > >`
+
+A ideia é utilizar o `getSacolaAtual()` ou `pedidosAntigos()` para pegar a(s) sacola(s) e aí passar ela(s) para esse método para pegar a lista de itens agrupada por restaurantes (na sacola pode ter itens de mais de um restaurante). O método funciona assim:
+
+* verifica se a Sacola está vazia. Se sim, lança `SacolaVaziaException`
+* se não, retorna uma `Hashtable` onde as chaves são os Restaurantes de onde os pedidos foram realizados, e os itens são uma `ArrayList` com os itens que foram comprados do respectivo restaurante.
+* se der algum erro no processo, lança a Exception.
+
+### `getTotalSacola( sacola : Sacola ) : double`
+
+Mesma ideia aqui: utilizar o `getSacolaAtual()` ou `pedidosAntigos()` para pegar a(s) sacola(s) e aí passar ela(s) para esse método para pegar o valor total da sacola. Se a sacola estiver vazia, uma `SacolaVaziaException` vai ser lançada.
+
 ## NegociosGerente
 
 ### `gerenteExiste ( cpf : String ) : boolean`

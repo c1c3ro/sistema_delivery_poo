@@ -137,5 +137,9 @@ public class Sacola {
 	public Hashtable<Gerente, Integer> aprovacoesGerentes() {
 		return this.aprovacoes; // para ver quais gerentes/restaurantes faltam aprovar pedidos
 	}
+	
+	public int getQtdItens() {
+		return this.itens.size();
+	}
 
 }
