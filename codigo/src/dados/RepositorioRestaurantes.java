@@ -1,10 +1,11 @@
 package dados;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import negocios.Restaurante;
 
-public class RepositorioRestaurantes {
+public class RepositorioRestaurantes implements Serializable {
 	
 	private ArrayList<Restaurante> repositorio;
 	

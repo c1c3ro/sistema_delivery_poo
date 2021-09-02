@@ -1,6 +1,8 @@
 package negocios;
 
-public abstract class UsuarioAbstrato {
+import java.io.Serializable;
+
+public abstract class UsuarioAbstrato implements Serializable {
 	
 	private String nome;
 	private String senha;

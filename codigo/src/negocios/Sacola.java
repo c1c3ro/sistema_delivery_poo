@@ -1,12 +1,13 @@
 package negocios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 import Exceptions.UsuarioNaoEncontradoException;
 
-public class Sacola {
+public class Sacola implements Serializable {
 	
 	public Hashtable<Restaurante, ArrayList<Item>> itens;
 	public Hashtable<Gerente, Integer> aprovacoes;

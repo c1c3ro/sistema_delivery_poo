@@ -1,9 +1,10 @@
 package negocios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class Gerente extends UsuarioAbstrato {
+public class Gerente extends UsuarioAbstrato implements Serializable {
 	
 	private Restaurante restaurante;
 	private Hashtable<Sacola, ArrayList<Item>> pedidosParaAprovacao;
@@ -11,6 +12,7 @@ public class Gerente extends UsuarioAbstrato {
 	public Gerente(String nome, String cpf, String senha, Restaurante restaurante) {
 		super(nome, senha, cpf);
 		this.restaurante = restaurante;
+		this.pedidosParaAprovacao = new Hashtable<Sacola, ArrayList<Item>>();
 	}
 	
 	public int aprovarPedido(Sacola sacola) {

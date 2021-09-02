@@ -1,8 +1,9 @@
 package negocios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cliente extends UsuarioAbstrato {
+public class Cliente extends UsuarioAbstrato implements Serializable {
 	
 	// Dados do cliente
 	private String endereco;
