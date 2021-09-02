@@ -206,6 +206,14 @@ Verifica se o gerente existe:
 * caso contrário, atualiza o atributo correspondente com `novoValor : String`.
 * retorna o respectivo campo atualizado
 
+### `getPedidosParaAprovacao( gerente : Gerente ) : Hashtable < Sacola, ArrayList < Item > >`
+
+Verifica se o gerente existe:
+
+* se não existir, lança `NaoEncontradoException`
+* se existir, retorna uma `Hashtable` em que a chave é uma `Sacola()` e os elementos são uma `ArrayList` de `Item()`. Assim, dá para utilizar a `Sacola()` em `aprovarPedido()` e mostrar os itens para o Gerente com a `ArrayList`.
+* se der algum erro no processo, lança Exception.
+
 ## NegociosRestaurante
 
 ### `restauranteExiste ( cnpj : String ) : boolean`

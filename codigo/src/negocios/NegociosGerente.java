@@ -1,5 +1,8 @@
 package negocios;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 import Exceptions.ClienteJaExisteException;
 import Exceptions.OpcaoInvalidaException;
 import Exceptions.UsuarioNaoEncontradoException;
@@ -107,6 +110,17 @@ public class NegociosGerente {
 			throw e;
 		}
 		
+	}
+	
+	public Hashtable<Sacola, ArrayList<Item>> getPedidosParaAprovacao(Gerente gerente) throws UsuarioNaoEncontradoException {
+		if (!this.gerenteExiste(gerente.getCPF())) {
+			throw new UsuarioNaoEncontradoException("Gerente não encontrado!");
+		}
+		try {
+			return gerente.getPedidosParaAprovacao();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	public Gerente pesquisarGerentePorRestaurante(Restaurante restaurante) {

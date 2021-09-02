@@ -17,7 +17,7 @@ public class Item {
 		this.valor = valor;
 		this.categoria = categoria;
 		this.descricao = descricao;
-		ID = geradorDeID.nextInt(2^20);
+		ID = geradorDeID.nextInt(100000);
 		
 	}
 	

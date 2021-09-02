@@ -189,7 +189,9 @@ public class NegociosCliente {
 		
 			Cliente cliente = this.repositorio.consultar(cpf);
 			double carteira = cliente.getCarteira();
-			double valor = cliente.getSacola().getTotal();
+			Sacola clienteSacola = cliente.getSacola();
+			double valor = clienteSacola.getTotal();
+			clienteSacola.enviarPedidosParaAprovacao();
 			
 			if (valor > carteira) {
 				throw new SemDinheiroException("Sem dinheiro, irmão");

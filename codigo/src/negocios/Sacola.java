@@ -1,6 +1,7 @@
 package negocios;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -92,7 +93,9 @@ public class Sacola {
 			for (int i = 0; i < pedido.size(); i++) {
 				recebido += pedido.get(i).getValor();
 			}
-			gerente.getRestaurante().adicionarReceita(recebido);
+			gerenteRestaurante.adicionarReceita(recebido);
+			gerenteRestaurante.adicionarPedido(pedido);
+			gerente.removerPedidoParaAprovacao(this);
 			return aprGerente;
 		}
 	}
@@ -140,6 +143,16 @@ public class Sacola {
 	
 	public int getQtdItens() {
 		return this.itens.size();
+	}
+	
+	public void enviarPedidosParaAprovacao() {
+		Enumeration<Gerente> gerentes = this.aprovacoes.keys();
+		Gerente aux = null;
+		while (gerentes.hasMoreElements()) {
+			aux = gerentes.nextElement();
+			ArrayList<Item> gerentePedido = this.itens.get(aux.getRestaurante());
+			aux.adicionarPedidoParaAprovacao(this, gerentePedido);
+		}
 	}
 
 }

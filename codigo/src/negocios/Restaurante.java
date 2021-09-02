@@ -1,5 +1,8 @@
 package negocios;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 public class Restaurante {
 	
 	private String cnpj;
@@ -7,7 +10,7 @@ public class Restaurante {
 	public Cardapio cardapio;
 	public boolean aberto;
 	private double receita;
-	public Gerente gerente;
+	public Hashtable<Integer, ArrayList<Item>> pedidos;
 	
 	public Restaurante(String cnpj, String nome) {
 		this.cnpj = cnpj;
@@ -55,5 +58,9 @@ public class Restaurante {
 		return this.receita;
 	}
 	
+	public void adicionarPedido(ArrayList<Item> pedido) {
+		int id = this.pedidos.size();
+		this.pedidos.put(id, pedido);
+	}
 
 }
