@@ -25,7 +25,9 @@ public class InitialScene {
     
     @FXML
     void initialize() {
-    	this.holder.fachada = new Delivery();
+    	if (this.holder.fachada == null) {
+    		this.holder.fachada = new Delivery();
+    	}
     }
     
     @FXML
