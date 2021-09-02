@@ -1,5 +1,10 @@
 package negocios;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -8,12 +13,14 @@ import Exceptions.OpcaoInvalidaException;
 import Exceptions.UsuarioNaoEncontradoException;
 import dados.RepositorioGerentes;
 
-public class NegociosGerente {
+public class NegociosGerente implements Serializable {
 	
 	RepositorioGerentes repositorio;
+	private String filename;
 	
 	public NegociosGerente() {
 		this.repositorio = new RepositorioGerentes();
+		this.filename = "NegociosGerente.ser";
 	}
 	
 	public boolean gerenteExiste(String cpf) {
@@ -149,6 +156,34 @@ public class NegociosGerente {
 			throw e;
 		}
 		
+	}
+	
+	public void saveData() throws Exception {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream(filename);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(this);
+			
+			out.close();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public NegociosGerente readData() throws Exception {
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			NegociosGerente objeto = (NegociosGerente) in.readObject();
+			in.close();
+			return objeto;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

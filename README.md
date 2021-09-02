@@ -274,3 +274,15 @@ Verifica se o restaurante existe e:
 * Se não existir, lança `NaoEncontradoException`
 * Se existir, pesquisa o ID do item no Cardápio do restaurante e retorna o item encontrado.
 * Se não encontrar o item, lança Exception.
+
+## Todos os Negócios (Funcionalidades experimentais)
+
+A ideia é usar essas duas funções para salvar os dados que nós armazenamos em arquivos e depois carregar de volta. Assim, a gente facilita os testes e podemos criar tipo um "banco de dados" meia boca. Cada uma das classes `NegociosGerente()`, `NegociosCliente()` e `NegociosRestaurante()` tem esses dois métodos:
+
+### `saveData() : void`
+
+Esse método vai escrever os dados armazenados na respectiva classe de Negócio em um arquivo *.ser*: `NegociosGerente.ser`, `NegociosCliente.ser` e `NegociosRestaurante.ser`. Isso é feito utilizando a interface `Serializable` do `java.io`. Se algum erro acontecer no processo, uma Exception é lançada.
+
+### `readData() : Negocio`
+
+Esse método vai ler `NegociosGerente.ser`, `NegociosCliente.ser` ou `NegociosRestaurante.ser` e vai retornar um objeto `NegociosGerente()`, `NegociosCliente()` ou `NegociosRestaurante()`. A ideia é ter um botão na IU para salvar e para carregar os dados e quando o usuário clicar para carregar os dados, a gente substituir a respectiva variável de negócio na Fachada pelo objeto retornado neste método.
