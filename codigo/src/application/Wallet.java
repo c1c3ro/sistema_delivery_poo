@@ -44,7 +44,8 @@ public class Wallet {
     }
     
     private void updateLabels() {
-    	money.setText("R$ " + this.holder.getClienteLogado().getCarteira());
+    	String dinheiro = String.format("R$ %.2f", this.holder.getClienteLogado().getCarteira());
+    	money.setText(dinheiro);
     	addedLabel.setText("Adicionado!");
     	PauseTransition pause = new PauseTransition(Duration.millis(1000));
         pause.setOnFinished(

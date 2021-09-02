@@ -62,8 +62,11 @@ public class clientBag {
     	try {
     		Sacola sacola = holder.fachada.getSacolaAtual(holder.getClienteLogado().getCPF());
     		
-    		totalLabel.setText("Total R$: " + holder.fachada.getTotalSacola(sacola));
-    		walletLabel.setText("Carteira R$: " + holder.getClienteLogado().getCarteira());
+    		String total = String.format("Total: R$ %.2f", holder.fachada.getTotalSacola(sacola));
+    		String wallet = String.format("Carteira: R$ %.2f", holder.getClienteLogado().getCarteira());
+    		
+    		totalLabel.setText(total);
+    		walletLabel.setText(wallet);
     		
     		itensArray = holder.fachada.getItensNaSacola(sacola);
     		
