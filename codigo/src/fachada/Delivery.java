@@ -146,6 +146,23 @@ public class Delivery {
 		return gerentes.pesquisarGerentePorRestaurante(restaurante);
 	}
 
+	public NegociosCliente getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(NegociosCliente clientes) {
+		this.clientes = clientes;
+	}
+
+	public NegociosGerente getGerentes() {
+		return gerentes;
+	}
+
+	public void setGerentes(NegociosGerente gerentes) {
+		this.gerentes = gerentes;
+	}
+
+	
 	public NegociosRestaurante getRestaurantes() {
 		return restaurantes;
 	}

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="application.InitialScene">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InitialScene">
    <top>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -33,16 +33,31 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="client_option" layoutX="128.0" layoutY="74.0" mnemonicParsing="false" onAction="#showClientScene" style="-fx-background-color: #f2a22c;" text="Cliente">
+            <Button fx:id="client_option" layoutX="131.0" layoutY="48.0" mnemonicParsing="false" onAction="#showClientScene" style="-fx-background-color: #f2a22c;" text="Cliente">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="manager_option" layoutX="332.0" layoutY="74.0" mnemonicParsing="false" onAction="#showManagerScene" style="-fx-background-color: #f2a22c;" text="Gerente">
+            <Button fx:id="manager_option" layoutX="328.0" layoutY="48.0" mnemonicParsing="false" onAction="#showManagerScene" style="-fx-background-color: #f2a22c;" text="Gerente">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Button>
+            <Button layoutX="14.0" layoutY="158.0" mnemonicParsing="false" onAction="#loadData" prefHeight="27.0" prefWidth="125.0" style="-fx-background-color: #f2a22c;" text="Carregar dados">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="150.0" layoutY="158.0" mnemonicParsing="false" onAction="#saveData" prefHeight="27.0" prefWidth="125.0" style="-fx-background-color: #f2a22c;" text="Salvar dados">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Button>
+            <Label fx:id="messageLabel" layoutX="328.0" layoutY="158.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
