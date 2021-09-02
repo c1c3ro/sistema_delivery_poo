@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import Exceptions.ClienteJaExisteException;
+import Exceptions.OpcaoInvalidaException;
+import Exceptions.SacolaVaziaException;
 import Exceptions.SemDinheiroException;
 import Exceptions.UsuarioNaoEncontradoException;
 
@@ -64,6 +66,22 @@ public class Delivery {
 	
 	public double realizarCompra(String cpf) throws UsuarioNaoEncontradoException, SemDinheiroException {
 		return clientes.realizarCompra(cpf);
+	}
+	
+	public String atualizarCliente(String cpf, int campo, String novoValor) throws UsuarioNaoEncontradoException, OpcaoInvalidaException {
+		return clientes.atualizarCliente(cpf, campo, novoValor);
+	}
+	
+	public Sacola getSacolaAtual(String cpf) throws UsuarioNaoEncontradoException {
+		return clientes.getSacolaAtual(cpf);
+	}
+	
+	public Hashtable<Restaurante, ArrayList<Item>> getItensNaSacola(Sacola sacola) throws SacolaVaziaException {
+		return clientes.getItensNaSacola(sacola);
+	}
+	
+	public double getTotalSacola(Sacola sacola) throws SacolaVaziaException {
+		return clientes.getTotalSacola(sacola);
 	}
 	
 	// Manager Methods

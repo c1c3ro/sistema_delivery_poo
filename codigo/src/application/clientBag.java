@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocios.Item;
+import negocios.Sacola;
 
 public class clientBag {
 
@@ -59,10 +60,13 @@ public class clientBag {
     	FachadaHolder holder = FachadaHolder.getInstance();
     	try {
 
-    		//itensCardapio = holder.fachada.getItensDoCardapio(holder.getRestauranteSelecionado());
     		
-    		//itensArray = new ArrayList<Item>();
-    		//itensCardapio.forEach((k, e) -> itensArray.add(e));
+    		Sacola sacola = holder.fachada.getSacolaAtual(holder.getClienteLogado().getCPF());
+    		
+    		//itensSacola = holder.fachada.getItensNaSacola(sacola);
+    		
+    		itensArray = new ArrayList<Item>();
+    		itensSacola.forEach((k, e) -> itensArray.add(e));
     		
     		itensObs = FXCollections.observableArrayList(itensArray);
 
