@@ -123,7 +123,7 @@ public class ViewMenuClient {
     	} catch (Exception e) {
     		Alert alert = new Alert(Alert.AlertType.ERROR);
     		alert.setTitle("Aviso");
-			alert.setHeaderText("Tivemos um problema, entre e saia de novo!");
+			alert.setHeaderText("Tivemos um problema, saia e entre de novo!");
 			alert.show();
     	}
     }
