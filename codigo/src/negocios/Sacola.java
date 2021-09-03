@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Random;
 
 import Exceptions.UsuarioNaoEncontradoException;
 
@@ -13,6 +14,9 @@ public class Sacola implements Serializable {
 	public Hashtable<Gerente, Integer> aprovacoes;
 	public double total;
 	public int status;
+	public String cpfDono;
+	Random geradorDeID = new Random();
+	public int ID;
 	/*
 	 * status:
 	 * 0 - esperando gerente(s) aprovar
@@ -20,11 +24,13 @@ public class Sacola implements Serializable {
 	 * 1 - aprovado pelo(s) gerente(s)
 	 */
 	
-	public Sacola() {
+	public Sacola(String cpfDono) {
 		itens = new Hashtable<Restaurante, ArrayList<Item>>();
 		aprovacoes = new Hashtable<Gerente, Integer>();
 		total = 0.0;
 		status = 0;
+		this.cpfDono = cpfDono;
+		ID = geradorDeID.nextInt(100000);
 	}
 	
 	public double adicionarItem(Item item, Gerente gerente) {
@@ -135,6 +141,14 @@ public class Sacola implements Serializable {
 	
 	public int getStatus() {
 		return this.status;
+	}
+	
+	public String getCpfDono() {
+		return this.cpfDono;
+	}
+	
+	public int getID() {
+		return this.ID;
 	}
 	
 	public Hashtable<Gerente, Integer> aprovacoesGerentes() {
