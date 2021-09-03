@@ -168,5 +168,9 @@ public class Sacola implements Serializable {
 			aux.adicionarPedidoParaAprovacao(this, gerentePedido);
 		}
 	}
+	
+	public String toString() {
+		return Integer.toString(ID);
+	}
 
 }

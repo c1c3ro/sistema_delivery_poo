@@ -67,7 +67,8 @@ public class ManagerOptions {
 
     @FXML
     void approveOrder(ActionEvent event) {
-    	System.out.println("hey, do nothing");
+    	Main m = new Main();
+        m.changeScene("aproveOrder.fxml");
     }
 
 
