@@ -1,20 +1,14 @@
 package application;
 import fachada.Delivery;
-import java.io.IOException;
 
 import Exceptions.ClienteJaExisteException;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import fachada.Delivery;
-import javafx.scene.Scene;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 
 public class SignInClient {
 
@@ -59,13 +53,23 @@ public class SignInClient {
 		    } else {
 		    	holder.fachada.cadastrarCliente(nameField.getText().toString(), cpfField.getText().toString(), passwordField.getText().toString(),
 		    			adressField.getText().toString());
+		    	
+		    	 nameField.setText("");
+				 cpfField.setText("");
+				 adressField.setText("");
+				 passwordField.setText("");
+				 
+				 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				 alert.setTitle("Aviso");
+				 alert.setHeaderText("Cliente cadastrado com sucesso!");
+				 alert.show();
 		    }
 		  }
  		catch (ClienteJaExisteException e) {
  			messageLabel.setText("Cliente já existe!");
 		  }
  		
-    	messageLabel.setText("Cadastrado!");
+    	
     }
 
 }

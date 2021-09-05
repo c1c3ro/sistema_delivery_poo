@@ -1,15 +1,26 @@
 package negocios;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 import Exceptions.ClienteJaExisteException;
+import Exceptions.OpcaoInvalidaException;
 import Exceptions.UsuarioNaoEncontradoException;
 import dados.RepositorioGerentes;
 
-public class NegociosGerente {
+public class NegociosGerente implements Serializable {
 	
 	RepositorioGerentes repositorio;
+	private String filename;
 	
 	public NegociosGerente() {
 		this.repositorio = new RepositorioGerentes();
+		this.filename = "NegociosGerente.ser";
 	}
 	
 	public boolean gerenteExiste(String cpf) {
@@ -28,7 +39,7 @@ public class NegociosGerente {
 			throw new ClienteJaExisteException("Gerente já existe!");
 		} else {
 			Restaurante novoRestaurante = new Restaurante(restauranteCnpj, restauranteNome);
-			negocioRestaurante.cadastrarRestaurante(restauranteCnpj, restauranteNome);
+			negocioRestaurante.cadastrarRestaurante(novoRestaurante);
 			Gerente novoGerente = new Gerente(nome, cpf, senha, novoRestaurante);
 			try {
 				this.repositorio.adicionar(novoGerente);
@@ -71,6 +82,7 @@ public class NegociosGerente {
 		
 		try {
 			gerente.getRestaurante().abrir();
+			System.out.println("Restaurante "+gerente.getRestaurante().getNome()+" está aberto? "+gerente.getRestaurante().aberto);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -81,6 +93,7 @@ public class NegociosGerente {
 		
 		try {
 			gerente.getRestaurante().fechar();
+			System.out.println("Restaurante "+gerente.getRestaurante().getNome()+" está aberto? "+gerente.getRestaurante().aberto);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -106,6 +119,17 @@ public class NegociosGerente {
 		
 	}
 	
+	public Hashtable<Sacola, ArrayList<Item>> getPedidosParaAprovacao(Gerente gerente) throws UsuarioNaoEncontradoException {
+		if (!this.gerenteExiste(gerente.getCPF())) {
+			throw new UsuarioNaoEncontradoException("Gerente não encontrado!");
+		}
+		try {
+			return gerente.getPedidosParaAprovacao();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public Gerente pesquisarGerentePorRestaurante(Restaurante restaurante) {
 		
 		try {
@@ -116,6 +140,50 @@ public class NegociosGerente {
 			throw e;
 		}
 		
+	}
+	
+	public String atualizarGerente(String cpf, int campo, String novoValor) throws UsuarioNaoEncontradoException, OpcaoInvalidaException {
+		
+		Gerente paraAtualizar = this.repositorio.consultar(cpf);
+		
+		if (paraAtualizar == null) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		try {
+			return this.repositorio.atualizar(paraAtualizar, campo, novoValor);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public void saveData() throws Exception {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream(filename);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(this);
+			
+			out.close();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public NegociosGerente readData() throws Exception {
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			NegociosGerente objeto = (NegociosGerente) in.readObject();
+			in.close();
+			return objeto;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

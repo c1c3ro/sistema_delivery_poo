@@ -33,12 +33,12 @@
    <center>
       <AnchorPane prefHeight="276.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="restaurantButton" layoutX="163.0" layoutY="79.0" mnemonicParsing="false" onAction="#seeRestaurants" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Aprovar pedidos">
+            <Button fx:id="orderButton" layoutX="163.0" layoutY="186.0" mnemonicParsing="false" onAction="#approveOrder" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Aprovar pedidos">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="updateButton" layoutX="163.0" layoutY="160.0" mnemonicParsing="false" onAction="#updateData" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Atualizar cadastro">
+            <Button fx:id="updateButton" layoutX="163.0" layoutY="241.0" mnemonicParsing="false" onAction="#updateData" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Atualizar cadastro">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -46,6 +46,21 @@
             <Button fx:id="exitButton" layoutX="511.0" layoutY="256.0" mnemonicParsing="false" onAction="#exitToLogIn" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #f2a22c;" text="Sair">
                <font>
                   <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="menuButton" layoutX="163.0" layoutY="128.0" mnemonicParsing="false" onAction="#updateMenu" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Atualizar cardápio">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="seeMenuButton" layoutX="163.0" layoutY="72.0" mnemonicParsing="false" onAction="#seeMenu" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Ver cardápio">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="openCloseButton" layoutX="163.0" layoutY="14.0" mnemonicParsing="false" onAction="#openCloseRestaurant" prefHeight="46.0" prefWidth="274.0" style="-fx-background-color: #f2a22c;" text="Abrir restaurante">
+               <font>
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Button>
          </children>

@@ -1,13 +1,17 @@
 package negocios;
 
-public class Restaurante {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+public class Restaurante implements Serializable {
 	
 	private String cnpj;
 	private String nome;
 	public Cardapio cardapio;
 	public boolean aberto;
 	private double receita;
-	public Gerente gerente;
+	public Hashtable<Integer, ArrayList<Item>> pedidos;
 	
 	public Restaurante(String cnpj, String nome) {
 		this.cnpj = cnpj;
@@ -15,6 +19,7 @@ public class Restaurante {
 		this.cardapio = new Cardapio();
 		this.aberto = false;
 		receita = 0.0;
+		this.pedidos = new Hashtable<Integer, ArrayList<Item>>();
 	}
 	
 	public double getReceita() {
@@ -45,10 +50,19 @@ public class Restaurante {
 		this.aberto = false;
 	}	
 	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
+	
 	public double adicionarReceita(double recebido) {
 		this.receita += recebido;
 		return this.receita;
 	}
 	
+	public void adicionarPedido(ArrayList<Item> pedido) {
+		int id = this.pedidos.size()+1;
+		this.pedidos.put(id, pedido);
+	}
 
 }

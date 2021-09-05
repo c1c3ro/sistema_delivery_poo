@@ -101,6 +101,42 @@ Verifica se o cliente com o referido CPF já existe e:
     * 1 - pedido aprovado pelo gerente
     * 0 - pedido não aprovado ainda
 
+### `atualizarCliente( cpf : String, campo : int, novoValor : String) : void`
+
+Verifica se o cliente existe:
+
+* se não existir, lança `NaoEncontradoException`
+* se existir, verifica o valor `campo : int` passado para o método:
+    * 1: atualizar Nome
+    * 2: atualizar Senha
+    * 3: atualizar Endereço
+* se `campo : int` não for nenhuma destas opções acima, lança Exception `OpcaoInvalida`
+* caso contrário, atualiza o atributo correspondente com `novoValor : String`
+* retorna o respectivo campo atualizado
+
+### `getSacolaAtual( cpf : String ) : Sacola`
+
+Verifica se o cliente existe:
+
+* se não existir, lança `NaoEncontradoException`
+* retorna o objeto `Sacola()` do cliente ou uma Exception caso dê algum erro
+
+### `getItensNaSacolaPorRestaurante( sacola : Sacola ) : Hashtable < Restaurante, ArrayList< Item > >`
+
+A ideia é utilizar o `getSacolaAtual()` ou `pedidosAntigos()` para pegar a(s) sacola(s) e aí passar ela(s) para esse método para pegar a lista de itens agrupada por restaurantes (na sacola pode ter itens de mais de um restaurante). O método funciona assim:
+
+* verifica se a Sacola está vazia. Se sim, lança `SacolaVaziaException`
+* se não, retorna uma `Hashtable` onde as chaves são os Restaurantes de onde os pedidos foram realizados, e os itens são uma `ArrayList` com os itens que foram comprados do respectivo restaurante.
+* se der algum erro no processo, lança a Exception.
+
+### `getItensNaSacola( sacola : Sacola ) : ArrayList< Item >`
+
+Mesma coisa que o de cima, mas retorna uma `ArrayList` com os itens da Sacola.
+
+### `getTotalSacola( sacola : Sacola ) : double`
+
+Mesma ideia aqui: utilizar o `getSacolaAtual()` ou `pedidosAntigos()` para pegar a(s) sacola(s) e aí passar ela(s) para esse método para pegar o valor total da sacola. Se a sacola estiver vazia, uma `SacolaVaziaException` vai ser lançada.
+
 ## NegociosGerente
 
 ### `gerenteExiste ( cpf : String ) : boolean`
@@ -162,6 +198,26 @@ Tenta encontrar o gerente que corresponde ao restaurante passado. **A ideia é u
 * Se retornar `null`, não encontrou nenhum gerente com o tal restaurante
 * Se encontrar, retornar o objeto `Gerente()` do gerente do restaurante
 
+### `atualizarGerente( cpf : String, campo : int, novoValor : String) : String`
+
+Verifica se o gerente existe:
+
+* se não existir, lança `NaoEncontradoException`
+* se existir, verifica o valor `campo : int` passado para o método:
+    * 1: atualizar Nome
+    * 2: atualizar Senha
+* se `campo : int` não for nenhuma destas opções acima, lança Exception `OpcaoInvalida`
+* caso contrário, atualiza o atributo correspondente com `novoValor : String`.
+* retorna o respectivo campo atualizado
+
+### `getPedidosParaAprovacao( gerente : Gerente ) : Hashtable < Sacola, ArrayList < Item > >`
+
+Verifica se o gerente existe:
+
+* se não existir, lança `NaoEncontradoException`
+* se existir, retorna uma `Hashtable` em que a chave é uma `Sacola()` e os elementos são uma `ArrayList` de `Item()`. Assim, dá para utilizar a `Sacola()` em `aprovarPedido()` e mostrar os itens para o Gerente com a `ArrayList`.
+* se der algum erro no processo, lança Exception.
+
 ## NegociosRestaurante
 
 ### `restauranteExiste ( cnpj : String ) : boolean`
@@ -202,11 +258,31 @@ Se existir mais de 1 restaurante cadastrado, vai retornar uma `ArrayList` com os
 
 Se não existir nenhum restaurante cadastrado, retorna `null`
 
-### `getItensDoCardapio ( cnpjRestaurante : String ) : Hashtable < String, ArrayList < Item > >`
+### `getItensDoCardapio ( restaurante : Restaurante ) : Hashtable < Integer, Item >`
 
 Verifica se o restaurante existe e:
 
 * Se não existir, lança `NaoEncontradoException`
-* Se existir, retorna os itens agrupados por categoria em uma `Hashtable< categorias : String, itensDaCategoria : ArrayList < Item > >`
+* Se existir, retorna os itens agrupados por categoria em uma `Hashtable< ID : Integer, Item : Item >`
 
 A ideia de ter esse método é para quando o cliente abrir um restaurante para visualizar o cardápio, a gente pegar essa Hashtable e exibir na tela os itens agrupados por categorias, tipo no iFood.
+
+### `getItemPorID ( restaurante : Restaurante, ID : int ) : Item`
+
+Verifica se o restaurante existe e:
+
+* Se não existir, lança `NaoEncontradoException`
+* Se existir, pesquisa o ID do item no Cardápio do restaurante e retorna o item encontrado.
+* Se não encontrar o item, lança Exception.
+
+## Todos os Negócios (Funcionalidades experimentais)
+
+A ideia é usar essas duas funções para salvar os dados que nós armazenamos em arquivos e depois carregar de volta. Assim, a gente facilita os testes e podemos criar tipo um "banco de dados" meia boca. Cada uma das classes `NegociosGerente()`, `NegociosCliente()` e `NegociosRestaurante()` tem esses dois métodos:
+
+### `saveData() : void`
+
+Esse método vai escrever os dados armazenados na respectiva classe de Negócio em um arquivo *.ser*: `NegociosGerente.ser`, `NegociosCliente.ser` e `NegociosRestaurante.ser`. Isso é feito utilizando a interface `Serializable` do `java.io`. Se algum erro acontecer no processo, uma Exception é lançada.
+
+### `readData() : Negocio`
+
+Esse método vai ler `NegociosGerente.ser`, `NegociosCliente.ser` ou `NegociosRestaurante.ser` e vai retornar um objeto `NegociosGerente()`, `NegociosCliente()` ou `NegociosRestaurante()`. A ideia é ter um botão na IU para salvar e para carregar os dados e quando o usuário clicar para carregar os dados, a gente substituir a respectiva variável de negócio na Fachada pelo objeto retornado neste método.

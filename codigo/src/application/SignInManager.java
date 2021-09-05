@@ -1,8 +1,8 @@
 package application;
-import java.io.IOException;
 
 import Exceptions.ClienteJaExisteException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -64,7 +64,17 @@ public class SignInManager {
 			    holder.fachada.cadastrarGerente(nameField.getText().toString(), cpfField.getText().toString(), passwordField.getText().toString(),
 			    		cnpjField.getText().toString(), restaurantField.getText().toString(), holder.fachada.getRestaurantes());
 			    
-			    messageLabel.setText("Cadastrado!");
+			    //messageLabel.setText("Cadastrado!");
+			    nameField.setText("");
+			    cpfField.setText("");
+			    passwordField.setText("");
+			    cnpjField.setText("");
+			    restaurantField.setText("");
+			    
+			    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			    alert.setTitle("Aviso");
+			    alert.setHeaderText("Gerente cadastrado com sucesso!");
+			    alert.show();
 		    }
 		    
 		  } catch (ClienteJaExisteException e) {

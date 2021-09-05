@@ -2,19 +2,29 @@ package negocios;
 
 import dados.RepositorioClientes;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import Exceptions.ClienteJaExisteException;
+import Exceptions.OpcaoInvalidaException;
 import Exceptions.SemDinheiroException;
 import Exceptions.UsuarioNaoEncontradoException;
+import Exceptions.SacolaVaziaException;
 
-public class NegociosCliente {
+public class NegociosCliente implements Serializable {
 	
 	RepositorioClientes repositorio;
+	private String filename;
 	
 	public NegociosCliente() {
 		this.repositorio = new RepositorioClientes();
+		filename = "NegociosCliente.ser";
 	}
 	
 	public boolean clienteExiste(String cpf) {
@@ -187,7 +197,9 @@ public class NegociosCliente {
 		
 			Cliente cliente = this.repositorio.consultar(cpf);
 			double carteira = cliente.getCarteira();
-			double valor = cliente.getSacola().getTotal();
+			Sacola clienteSacola = cliente.getSacola();
+			double valor = clienteSacola.getTotal();
+			clienteSacola.enviarPedidosParaAprovacao();
 			
 			if (valor > carteira) {
 				throw new SemDinheiroException("Sem dinheiro, irmão");
@@ -195,6 +207,113 @@ public class NegociosCliente {
 				return cliente.fazerPedido(valor);
 			}			
 			
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public String atualizarCliente(String cpf, int campo, String novoValor) throws UsuarioNaoEncontradoException, OpcaoInvalidaException {
+		
+		Cliente paraAtualizar = this.repositorio.consultar(cpf);
+		
+		if (paraAtualizar == null) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		try {
+			return this.repositorio.atualizar(paraAtualizar, campo, novoValor);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public Sacola getSacolaAtual(String cpf) throws UsuarioNaoEncontradoException {
+		
+		Cliente cliente = this.repositorio.consultar(cpf);
+		
+		if (cliente == null) {
+			throw new UsuarioNaoEncontradoException("Cliente não encontrado");
+		}
+		
+		try {
+			return cliente.getSacola();
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public Hashtable<Restaurante, ArrayList<Item>> getItensNaSacolaPorRestaurante(Sacola sacola) throws SacolaVaziaException {
+		if (sacola.getQtdItens() == 0) {
+			throw new SacolaVaziaException("getItensPorRestaurante: A sacola está vazia");
+		}
+		try {
+			return sacola.getItens();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public ArrayList<Item> getItensNaSacola(Sacola sacola) throws SacolaVaziaException {
+		if (sacola.getQtdItens() == 0) {
+			throw new SacolaVaziaException("getItensNaSacola: A sacola está vazia");
+		}
+		try {
+			Hashtable<Restaurante, ArrayList<Item>> itensPorRestaurante = sacola.getItens();
+			if (itensPorRestaurante.size() == 0) {
+				throw new SacolaVaziaException("itensPorRestaurante está vazio");
+			}
+			ArrayList<Item> itensNaSacola = new ArrayList<Item>();
+			Enumeration<Restaurante> restaurantes = itensPorRestaurante.keys();
+			Restaurante aux = null;
+			while (restaurantes.hasMoreElements()) {
+				aux = restaurantes.nextElement();
+				ArrayList<Item> itens = itensPorRestaurante.get(aux);
+				for (int i = 0; i < itens.size(); i++) {
+					itensNaSacola.add(itens.get(i));
+				}
+			}
+			return itensNaSacola;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public double getTotalSacola(Sacola sacola) throws SacolaVaziaException {
+		if (sacola.getQtdItens() == 0) {
+			throw new SacolaVaziaException("getTotalSacola: A sacola está vazia");
+		}
+		try {
+			return sacola.getTotal();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void saveData() throws Exception {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream(filename);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(this);
+			
+			out.close();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public NegociosCliente readData() throws Exception {
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			NegociosCliente objeto = (NegociosCliente) in.readObject();
+			in.close();
+			return objeto;
 		} catch (Exception e) {
 			throw e;
 		}

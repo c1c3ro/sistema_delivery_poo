@@ -1,7 +1,5 @@
 package application;
 
-import java.io.IOException;
-
 import Exceptions.UsuarioNaoEncontradoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,14 +34,27 @@ public class LogInManager {
     }
 
     public void userLogIn(ActionEvent event) {
-        checkLogin();
+        if (!checkLogin()) {
+        	logInIncorreto.setText("Usuário não cadastrado!");
+        }
+        
+        if(logInCPF.getText().isEmpty() || logInPassword.getText().isEmpty()) {
+            logInIncorreto.setText("Digite suas informações!");
+        }
     }
 
-    private void checkLogin() {
+    private boolean checkLogin() {
         Main m = new Main();
         FachadaHolder holder = FachadaHolder.getInstance();
     	try {
-	    	if (holder.fachada != null && holder.fachada.matchLoginSenhaGerente(logInCPF.getText().toString(), logInPassword.getText().toString())) {
+    		
+    		if (holder.fachada == null) {
+    			return false;
+    		}
+    		
+    		var gerenteLogado = holder.fachada.matchLoginSenhaGerente(logInCPF.getText().toString(), logInPassword.getText().toString());
+	    	if (gerenteLogado != null) {
+	    		holder.setGerenteLogado(gerenteLogado);
 	    		m.changeScene("managerOptions.fxml");
 	    	} else {
 	    		logInIncorreto.setText("Senha incorreta!");
@@ -51,8 +62,7 @@ public class LogInManager {
     	} catch (UsuarioNaoEncontradoException e) {
     		logInIncorreto.setText("Usuário não cadastrado!");
     	}
-        if(logInCPF.getText().isEmpty() || logInPassword.getText().isEmpty()) {
-            logInIncorreto.setText("Digite suas informações!");
-        }
+        
+        return true;
     }
 }

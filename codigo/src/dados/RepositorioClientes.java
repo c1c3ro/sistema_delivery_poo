@@ -1,10 +1,13 @@
 package dados;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import Exceptions.OpcaoInvalidaException;
 
 import negocios.Cliente;
 
-public class RepositorioClientes implements RepositorioUsuarios<Cliente> {
+public class RepositorioClientes implements RepositorioUsuarios<Cliente>, Serializable {
 	
 	private ArrayList<Cliente> repositorio;
 	
@@ -49,9 +52,23 @@ public class RepositorioClientes implements RepositorioUsuarios<Cliente> {
 	}
 
 	@Override
-	public void atualizar(Cliente usuario) {
+	public String atualizar(Cliente usuario, int campo, String novoValor) throws OpcaoInvalidaException {
 		
-		
+		if (campo == 1) {
+			//nome
+			usuario.atualizarNome(novoValor);
+			return usuario.getNome();
+		} else if (campo == 2) {
+			//senha
+			usuario.atualizarSenha(novoValor);
+			return usuario.getSenha();
+		} else if (campo == 3) {
+			//endereco
+			usuario.atualizarEndereco(novoValor);
+			return usuario.getEndereco();
+		} else {
+			throw new OpcaoInvalidaException("Opção digitada inválida");
+		}
 		
 	}
 

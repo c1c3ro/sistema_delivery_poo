@@ -1,14 +1,17 @@
 package negocios;
 
-public abstract class UsuarioAbstrato {
+import java.io.Serializable;
+
+public abstract class UsuarioAbstrato implements Serializable {
 	
 	private String nome;
 	private String senha;
 	private String cpf;
 	
-	public UsuarioAbstrato(String nome, String senha) {
+	public UsuarioAbstrato(String nome, String senha, String cpf) {
 		this.nome = nome;
 		this.senha = senha;
+		this.cpf = cpf;
 	}
 	
 	public void atualizarNome(String nomeNovo) {

@@ -1,16 +1,72 @@
 package application;
+import fachada.Delivery;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import java.io.IOException;
+import javafx.scene.control.Label;
+import javafx.util.Duration;
+import negocios.NegociosRestaurante;
+import negocios.NegociosGerente;
+import negocios.NegociosCliente;
 
 public class InitialScene {
+	
+	private FachadaHolder holder = FachadaHolder.getInstance();
 	
     @FXML
     private Button client_option;
     
     @FXML
     private Button manager_option;
+    
+    @FXML
+    private Label messageLabel;
+    
+    @FXML
+    void initialize() {
+    	if (this.holder.fachada == null) {
+    		this.holder.fachada = new Delivery();
+    	}
+    }
+    
+    @FXML
+    void saveData(ActionEvent event) {
+    	try {
+    		/*holder.fachada.getRestaurantes().saveData();
+    		holder.fachada.getClientes().saveData();
+    		holder.fachada.getGerentes().saveData();
+    		messageLabel.setText("Sucesso!");
+    		emptyLabel();*/
+    		holder.salvarDados();
+    		messageLabel.setText("Sucesso!");
+    		emptyLabel();
+    	} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		messageLabel.setText("Ocorreu algum erro!");
+    		emptyLabel();
+    	}
+    }
+
+    @FXML
+    void loadData(ActionEvent event) {
+    	try {
+    		/*holder.fachada.setRestaurantes(holder.fachada.getRestaurantes().readData());
+    		holder.fachada.setClientes(holder.fachada.getClientes().readData());
+    		holder.fachada.setGerentes(holder.fachada.getGerentes().readData());
+    		messageLabel.setText("Sucesso!");
+    		emptyLabel();*/
+    		holder.carregarDados();
+    		messageLabel.setText("Sucesso!");
+    		emptyLabel();
+    	} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		messageLabel.setText("Ocorreu algum erro!");
+    		emptyLabel();
+    	}
+    }
     
     @FXML
     public void showClientScene(ActionEvent event) {
@@ -24,4 +80,14 @@ public class InitialScene {
         m.changeScene("logInManager.fxml");
     }
 	
+    @FXML
+    void emptyLabel() {
+    	PauseTransition pause = new PauseTransition(Duration.millis(1000));
+        pause.setOnFinished(
+            e -> {
+            	messageLabel.setText(" ");
+            });
+        pause.play();
+    }
+    
 }

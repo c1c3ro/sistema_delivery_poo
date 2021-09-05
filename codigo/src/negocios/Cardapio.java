@@ -1,10 +1,11 @@
 package negocios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-public class Cardapio {
+public class Cardapio implements Serializable {
 	
 	public Hashtable<Integer, Item> itensID; 
 	
@@ -14,6 +15,7 @@ public class Cardapio {
 	
 	public void adicionarItem(Item item) {
 		itensID.put(item.getID(), item);
+		System.out.println("Quantidade de itens no cardapio: "+itensID.size());
 	}
 	
 	public void removerItem(Item item) {
@@ -69,18 +71,24 @@ public class Cardapio {
 	
 	public Hashtable<String, ArrayList<Item>> itensPorCategoria(){
 		
+		// precisa ver o que tem de errado nisso aqui e corrigir todos os outros que tiverem
+		// o mesmo problema com a Enumeration
+		
 		Item aux;
 		String categoria;
 		
 		Hashtable<String, ArrayList<Item>> itensPorCategoria = new Hashtable<String, ArrayList<Item>>();
 		
 		Enumeration<Integer> IDs = itensID.keys();
+		//System.out.println("Tamanho itensID :"+itensID.size());
+		System.out.println(IDs);
 		
 		while (IDs.hasMoreElements()) {
 			int id = IDs.nextElement();
 			
 			aux = itensID.get(id);
 			categoria = aux.getCategoria();
+			System.out.println("Categoria "+categoria);
 			
 			if(!itensPorCategoria.containsKey(categoria)) {
 				ArrayList<Item> categItens = new ArrayList<Item>();
@@ -91,9 +99,15 @@ public class Cardapio {
 			}
 		}
 		
+		//System.out.println("Tamanhos de itens por Categoria: "+itensPorCategoria.size());
 		return itensPorCategoria;
 		
 		
+	}
+	
+	public Hashtable<Integer, Item> itensPorID(){
+		System.out.println("Quantidade de itens no cardapio: "+itensID.size());
+		return itensID;
 	}
 
 }

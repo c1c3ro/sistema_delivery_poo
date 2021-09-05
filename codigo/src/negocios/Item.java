@@ -1,8 +1,9 @@
 package negocios;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Item {
+public class Item implements Serializable {
 	
 	public String nome;
 	public double valor;
@@ -17,7 +18,7 @@ public class Item {
 		this.valor = valor;
 		this.categoria = categoria;
 		this.descricao = descricao;
-		ID = geradorDeID.nextInt(2^20);
+		ID = geradorDeID.nextInt(100000);
 		
 	}
 	

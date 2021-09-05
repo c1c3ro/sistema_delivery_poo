@@ -1,17 +1,22 @@
 package negocios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Random;
 
 import Exceptions.UsuarioNaoEncontradoException;
 
-public class Sacola {
+public class Sacola implements Serializable {
 	
 	public Hashtable<Restaurante, ArrayList<Item>> itens;
 	public Hashtable<Gerente, Integer> aprovacoes;
 	public double total;
 	public int status;
+	public String cpfDono;
+	Random geradorDeID = new Random();
+	public int ID;
 	/*
 	 * status:
 	 * 0 - esperando gerente(s) aprovar
@@ -19,11 +24,13 @@ public class Sacola {
 	 * 1 - aprovado pelo(s) gerente(s)
 	 */
 	
-	public Sacola() {
+	public Sacola(String cpfDono) {
 		itens = new Hashtable<Restaurante, ArrayList<Item>>();
 		aprovacoes = new Hashtable<Gerente, Integer>();
 		total = 0.0;
 		status = 0;
+		this.cpfDono = cpfDono;
+		ID = geradorDeID.nextInt(100000);
 	}
 	
 	public double adicionarItem(Item item, Gerente gerente) {
@@ -92,7 +99,9 @@ public class Sacola {
 			for (int i = 0; i < pedido.size(); i++) {
 				recebido += pedido.get(i).getValor();
 			}
-			gerente.getRestaurante().adicionarReceita(recebido);
+			gerenteRestaurante.adicionarReceita(recebido);
+			gerenteRestaurante.adicionarPedido(pedido);
+			gerente.removerPedidoParaAprovacao(this);
 			return aprGerente;
 		}
 	}
@@ -134,8 +143,34 @@ public class Sacola {
 		return this.status;
 	}
 	
+	public String getCpfDono() {
+		return this.cpfDono;
+	}
+	
+	public int getID() {
+		return this.ID;
+	}
+	
 	public Hashtable<Gerente, Integer> aprovacoesGerentes() {
 		return this.aprovacoes; // para ver quais gerentes/restaurantes faltam aprovar pedidos
+	}
+	
+	public int getQtdItens() {
+		return this.itens.size();
+	}
+	
+	public void enviarPedidosParaAprovacao() {
+		Enumeration<Gerente> gerentes = this.aprovacoes.keys();
+		Gerente aux = null;
+		while (gerentes.hasMoreElements()) {
+			aux = gerentes.nextElement();
+			ArrayList<Item> gerentePedido = this.itens.get(aux.getRestaurante());
+			aux.adicionarPedidoParaAprovacao(this, gerentePedido);
+		}
+	}
+	
+	public String toString() {
+		return Integer.toString(ID);
 	}
 
 }

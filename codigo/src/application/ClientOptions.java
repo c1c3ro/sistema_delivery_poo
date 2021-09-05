@@ -21,7 +21,8 @@ public class ClientOptions {
 
     @FXML
     void seeRestaurants(ActionEvent event) {
-    	System.out.println("hey, do nothing");
+    	Main m = new Main();
+        m.changeScene("seeOpenRestaurants.fxml");
     }
 
     @FXML

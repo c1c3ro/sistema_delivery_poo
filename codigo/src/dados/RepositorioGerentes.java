@@ -1,12 +1,15 @@
 package dados;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import Exceptions.OpcaoInvalidaException;
 
 import negocios.Cliente;
 import negocios.Gerente;
 import negocios.Restaurante;
 
-public class RepositorioGerentes implements RepositorioUsuarios<Gerente> {
+public class RepositorioGerentes implements RepositorioUsuarios<Gerente>, Serializable {
 	
 	private ArrayList<Gerente> repositorio;
 	
@@ -51,8 +54,19 @@ public class RepositorioGerentes implements RepositorioUsuarios<Gerente> {
 	}
 
 	@Override
-	public void atualizar(Gerente usuario) {		
+	public String atualizar(Gerente usuario, int campo, String novoValor) throws OpcaoInvalidaException {		
 		
+		if (campo == 1) {
+			//nome
+			usuario.atualizarNome(novoValor);
+			return usuario.getNome();
+		} else if (campo == 2) {
+			//senha
+			usuario.atualizarSenha(novoValor);
+			return usuario.getSenha();
+		} else {
+			throw new OpcaoInvalidaException("Opção digitada inválida");
+		}
 		
 	}
 	

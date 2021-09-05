@@ -10,7 +10,7 @@ import javafx.util.Duration;
 
 public class Wallet {
 	
-	private double moneyStored = 0.0;
+	private FachadaHolder holder = FachadaHolder.getInstance();
 	
 	@FXML
     private Button fiveButton;
@@ -38,11 +38,14 @@ public class Wallet {
 
     @FXML
     public void initialize() {
-        money.setText("R$ " + this.moneyStored);
+    	
+        money.setText("R$ " + this.holder.getClienteLogado().getCarteira());
+        
     }
     
     private void updateLabels() {
-    	money.setText("R$ " + this.moneyStored);
+    	String dinheiro = String.format("R$ %.2f", this.holder.getClienteLogado().getCarteira());
+    	money.setText(dinheiro);
     	addedLabel.setText("Adicionado!");
     	PauseTransition pause = new PauseTransition(Duration.millis(1000));
         pause.setOnFinished(
@@ -54,31 +57,31 @@ public class Wallet {
     
     @FXML
     void add100toWallet(ActionEvent event) {
-    	this.moneyStored += 100;
+    	this.holder.getClienteLogado().adicionarDinheiro(100);
     	updateLabels();
     }
 
     @FXML
     void add10toWallet(ActionEvent event) {
-    	this.moneyStored += 10;
+    	this.holder.getClienteLogado().adicionarDinheiro(10);
     	updateLabels();
     }
 
     @FXML
     void add20toWallet(ActionEvent event) {
-    	this.moneyStored += 20;
+    	this.holder.getClienteLogado().adicionarDinheiro(20);
     	updateLabels();
     }
 
     @FXML
     void add50toWallet(ActionEvent event){
-    	this.moneyStored += 50;
+    	this.holder.getClienteLogado().adicionarDinheiro(50);
     	updateLabels();
     }
 
     @FXML
     void add5toWallet(ActionEvent event) {
-    	this.moneyStored += 5;
+    	this.holder.getClienteLogado().adicionarDinheiro(5);
     	updateLabels();
     }
 
