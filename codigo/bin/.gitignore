@@ -2,4 +2,6 @@
 /application/
 /dados/
 /fachada/
+/img/
 /negocios/
+/module-info.class
