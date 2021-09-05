@@ -70,16 +70,21 @@ public class clientBag {
     		
     		itensArray = holder.fachada.getItensNaSacola(sacola);
     		
-    		itensObs = FXCollections.observableArrayList(itensArray);
-
-    		nameC.setCellValueFactory(new PropertyValueFactory<Item, String>("nome"));
-    		valueC.setCellValueFactory(new PropertyValueFactory<Item, Double>("valor"));
-    		categoryC.setCellValueFactory(new PropertyValueFactory<Item, String>("categoria"));
-    		descriptionC.setCellValueFactory(new PropertyValueFactory<Item, String>("descricao"));
-    		idC.setCellValueFactory(new PropertyValueFactory<Item, Integer>("ID"));
-    		
-    		menuTable.setItems(itensObs);
-    		    	
+    		if (itensArray != null) {
+    			itensObs = FXCollections.observableArrayList(itensArray);
+        		nameC.setCellValueFactory(new PropertyValueFactory<Item, String>("nome"));
+        		valueC.setCellValueFactory(new PropertyValueFactory<Item, Double>("valor"));
+        		categoryC.setCellValueFactory(new PropertyValueFactory<Item, String>("categoria"));
+        		descriptionC.setCellValueFactory(new PropertyValueFactory<Item, String>("descricao"));
+        		idC.setCellValueFactory(new PropertyValueFactory<Item, Integer>("ID"));
+        		
+        		menuTable.setItems(itensObs);
+    		} else {
+    			Alert alert = new Alert(Alert.AlertType.ERROR);
+    			alert.setTitle("Aviso");
+    			alert.setHeaderText("Sacola vazia, adicione produtos!");
+    			alert.show();
+    		}
     	} catch (Exception e) {
     		Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Aviso");
@@ -106,7 +111,9 @@ public class clientBag {
     		alert.setTitle("Sucesso");
 			alert.setHeaderText("Enviamos seu pedido para o(s) gerente(s), quando aprovado, o pedido chegará no seu endereço!");
 			alert.show();
-			initialize();
+			
+			menuTable.getItems().clear();
+			//initialize();
 
     	} catch (SemDinheiroException e) {
     		messageLabel.setText("Dinheiro insuficiente!");
