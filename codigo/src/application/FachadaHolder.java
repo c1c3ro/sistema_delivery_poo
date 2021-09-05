@@ -49,4 +49,12 @@ public final class FachadaHolder {
 		this.gerenteLogado = gerenteLogado;
 	}
 	
+	public void salvarDados() throws Exception {
+		this.fachada.saveData();
+	}
+	
+	public void carregarDados() throws Exception {
+		this.fachada = this.fachada.readData();
+	}
+	
 }

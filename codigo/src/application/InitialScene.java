@@ -3,6 +3,8 @@ import fachada.Delivery;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
@@ -33,9 +35,12 @@ public class InitialScene {
     @FXML
     void saveData(ActionEvent event) {
     	try {
-    		holder.fachada.getRestaurantes().saveData();
+    		/*holder.fachada.getRestaurantes().saveData();
     		holder.fachada.getClientes().saveData();
     		holder.fachada.getGerentes().saveData();
+    		messageLabel.setText("Sucesso!");
+    		emptyLabel();*/
+    		holder.salvarDados();
     		messageLabel.setText("Sucesso!");
     		emptyLabel();
     	} catch (Exception e) {
@@ -48,9 +53,12 @@ public class InitialScene {
     @FXML
     void loadData(ActionEvent event) {
     	try {
-    		holder.fachada.setRestaurantes(holder.fachada.getRestaurantes().readData());
+    		/*holder.fachada.setRestaurantes(holder.fachada.getRestaurantes().readData());
     		holder.fachada.setClientes(holder.fachada.getClientes().readData());
     		holder.fachada.setGerentes(holder.fachada.getGerentes().readData());
+    		messageLabel.setText("Sucesso!");
+    		emptyLabel();*/
+    		holder.carregarDados();
     		messageLabel.setText("Sucesso!");
     		emptyLabel();
     	} catch (Exception e) {

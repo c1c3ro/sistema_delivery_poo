@@ -246,7 +246,7 @@ public class NegociosCliente implements Serializable {
 	
 	public Hashtable<Restaurante, ArrayList<Item>> getItensNaSacolaPorRestaurante(Sacola sacola) throws SacolaVaziaException {
 		if (sacola.getQtdItens() == 0) {
-			throw new SacolaVaziaException("A sacola está vazia");
+			throw new SacolaVaziaException("getItensPorRestaurante: A sacola está vazia");
 		}
 		try {
 			return sacola.getItens();
@@ -257,7 +257,7 @@ public class NegociosCliente implements Serializable {
 	
 	public ArrayList<Item> getItensNaSacola(Sacola sacola) throws SacolaVaziaException {
 		if (sacola.getQtdItens() == 0) {
-			throw new SacolaVaziaException("A sacola está vazia");
+			throw new SacolaVaziaException("getItensNaSacola: A sacola está vazia");
 		}
 		try {
 			Hashtable<Restaurante, ArrayList<Item>> itensPorRestaurante = sacola.getItens();
@@ -282,7 +282,7 @@ public class NegociosCliente implements Serializable {
 	
 	public double getTotalSacola(Sacola sacola) throws SacolaVaziaException {
 		if (sacola.getQtdItens() == 0) {
-			throw new SacolaVaziaException("A sacola está vazia");
+			throw new SacolaVaziaException("getTotalSacola: A sacola está vazia");
 		}
 		try {
 			return sacola.getTotal();

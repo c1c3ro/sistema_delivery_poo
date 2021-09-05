@@ -1,4 +1,9 @@
 package fachada;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -10,16 +15,18 @@ import Exceptions.UsuarioNaoEncontradoException;
 
 import negocios.*;
 
-public class Delivery {
+public class Delivery implements Serializable {
 	
 	private NegociosCliente clientes;
 	private NegociosGerente gerentes;
 	private NegociosRestaurante restaurantes;
+	private String filename;
 	
 	public Delivery() {
 		this.clientes = new NegociosCliente();
 		this.gerentes = new NegociosGerente();
 		this.restaurantes = new NegociosRestaurante();
+		this.filename = "delivery.ser";
 	}
 	
 	// Client Methods
@@ -177,6 +184,35 @@ public class Delivery {
 
 	public void setRestaurantes(NegociosRestaurante restaurantes) {
 		this.restaurantes = restaurantes;
+	}
+	
+	// save and load
+	public void saveData() throws Exception {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream(filename);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(this);
+			
+			out.close();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public Delivery readData() throws Exception {
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			Delivery objeto = (Delivery) in.readObject();
+			in.close();
+			return objeto;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
 }
