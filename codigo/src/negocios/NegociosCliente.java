@@ -199,11 +199,14 @@ public class NegociosCliente implements Serializable {
 			double carteira = cliente.getCarteira();
 			Sacola clienteSacola = cliente.getSacola();
 			double valor = clienteSacola.getTotal();
-			clienteSacola.enviarPedidosParaAprovacao();
 			
 			if (valor > carteira) {
 				throw new SemDinheiroException("Sem dinheiro, irmão");
 			} else {
+				System.out.println("O cliente possui dinheiro suficiente.");
+				System.out.println("Enviando pedido para aprovação dos gerentes");
+				clienteSacola.enviarPedidosParaAprovacao();
+				System.out.println("Debitando valor de "+valor+" da carteira do cliente");
 				return cliente.fazerPedido(valor);
 			}			
 			

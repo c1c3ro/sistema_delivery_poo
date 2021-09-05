@@ -1,6 +1,8 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -58,7 +60,13 @@ public class AproveOrder {
     	
     	try {
     		
-    		Set<Sacola> sacolas = holder.fachada.getPedidosParaAprovacao(null).keySet();
+    		Hashtable<Sacola, ArrayList<Item>> pedidos = holder.fachada.getPedidosParaAprovacao(holder.getGerenteLogado());
+    		ArrayList<Sacola> sacolas = new ArrayList<Sacola>();
+    		Enumeration<Sacola> sacolasPedidos = pedidos.keys();
+    		while(sacolasPedidos.hasMoreElements()) {
+    			Sacola aux = sacolasPedidos.nextElement();
+    			sacolas.add(aux);
+    		}
     		ObservableList<Sacola> sacolasObs = FXCollections.observableArrayList(sacolas);
     		comboP.setItems(sacolasObs);
     		

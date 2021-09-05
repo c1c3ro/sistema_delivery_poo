@@ -15,7 +15,7 @@ public class Cliente extends UsuarioAbstrato implements Serializable {
 		super(nome, senha, cpf);
 		this.endereco = endereco;
 		this.carteira = 0;
-		this.sacola = new Sacola(this.getCPF());
+		this.sacola = new Sacola(cpf, nome);
 		pedidosAntigos = new ArrayList<Sacola>();
 	}
 	
@@ -29,7 +29,10 @@ public class Cliente extends UsuarioAbstrato implements Serializable {
 		this.carteira -= valor;
 		
 		pedidosAntigos.add(this.sacola);
-		this.sacola = new Sacola(this.getCPF());
+		this.sacola.setDateTime();
+		this.sacola = new Sacola(this.getCPF(), this.getNome());
+		
+		System.out.println("Carteira atual: "+this.carteira);
 		
 		return this.carteira;
 	}
