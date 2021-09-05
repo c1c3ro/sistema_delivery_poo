@@ -121,11 +121,14 @@ public class NegociosGerente implements Serializable {
 	
 	public Hashtable<Sacola, ArrayList<Item>> getPedidosParaAprovacao(Gerente gerente) throws UsuarioNaoEncontradoException {
 		if (!this.gerenteExiste(gerente.getCPF())) {
+			System.out.println("Gerente não encontrado!");
 			throw new UsuarioNaoEncontradoException("Gerente não encontrado!");
 		}
 		try {
+			System.out.println("Tentando obter os pedidos para aprovação");
 			return gerente.getPedidosParaAprovacao();
 		} catch (Exception e) {
+			System.out.println("getPedidosParaAprovacao: algum erro inesperado!");
 			throw e;
 		}
 	}

@@ -49,5 +49,9 @@ public class Item implements Serializable {
 	public void setNome(String novoNome) {
 		this.nome = novoNome;
 	}
+	
+	public String toString() {
+		return ""+ID+": "+nome+" - "+valor;
+	}
 
 }

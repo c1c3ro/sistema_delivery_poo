@@ -22,6 +22,14 @@ public class Gerente extends UsuarioAbstrato implements Serializable {
 	}
 	
 	public void adicionarPedidoParaAprovacao(Sacola sacola, ArrayList<Item> pedido) {
+		if (pedido.size() == 0) {
+			System.out.println("Pedido para "+this.getNome()+" vazio!");
+		} else {
+			System.out.println("Pedido sendo adicionado para "+this.getNome()+" aprovar no seu restaurante "+this.getRestaurante().getNome()+":");
+			for (int i = 0; i < pedido.size(); i++) {
+				System.out.println(pedido.get(i).toString());
+			}
+		}
 		this.pedidosParaAprovacao.put(sacola, pedido);
 	}
 	
@@ -30,6 +38,7 @@ public class Gerente extends UsuarioAbstrato implements Serializable {
 	}
 	
 	public Hashtable<Sacola, ArrayList<Item>> getPedidosParaAprovacao() {
+		System.out.println("Quantidade de pedidos para aprovação: "+this.pedidosParaAprovacao.size());
 		return this.pedidosParaAprovacao;
 	}
 

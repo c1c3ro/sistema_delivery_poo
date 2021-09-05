@@ -1,6 +1,8 @@
 package negocios;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -15,6 +17,8 @@ public class Sacola implements Serializable {
 	public double total;
 	public int status;
 	public String cpfDono;
+	public String nomeDono;
+	public LocalDateTime data;
 	Random geradorDeID = new Random();
 	public int ID;
 	/*
@@ -24,13 +28,19 @@ public class Sacola implements Serializable {
 	 * 1 - aprovado pelo(s) gerente(s)
 	 */
 	
-	public Sacola(String cpfDono) {
+	public Sacola(String cpfDono, String nomeDono) {
 		itens = new Hashtable<Restaurante, ArrayList<Item>>();
 		aprovacoes = new Hashtable<Gerente, Integer>();
 		total = 0.0;
 		status = 0;
 		this.cpfDono = cpfDono;
+		this.nomeDono = nomeDono;
 		ID = geradorDeID.nextInt(100000);
+		this.data = null;
+	}
+	
+	public void setDateTime() {
+		this.data = LocalDateTime.now();
 	}
 	
 	public double adicionarItem(Item item, Gerente gerente) {
@@ -161,16 +171,20 @@ public class Sacola implements Serializable {
 	
 	public void enviarPedidosParaAprovacao() {
 		Enumeration<Gerente> gerentes = this.aprovacoes.keys();
+		System.out.println("Quantidade de gerentes para aprovar este pedido: "+this.aprovacoes.size());
 		Gerente aux = null;
 		while (gerentes.hasMoreElements()) {
 			aux = gerentes.nextElement();
 			ArrayList<Item> gerentePedido = this.itens.get(aux.getRestaurante());
+			System.out.println("Gerente "+aux.getNome()+" do restaurante "+aux.getRestaurante().getNome()+" precisa aprovar pedido com "+gerentePedido.size()+" itens.");
+			System.out.println("Adicionando pedido na lista de aprovações do gerente "+aux.getNome());
 			aux.adicionarPedidoParaAprovacao(this, gerentePedido);
 		}
 	}
 	
 	public String toString() {
-		return Integer.toString(ID);
+		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+		return this.nomeDono+"#"+Integer.toString(ID)+" "+this.data.format(myFormatObj);
 	}
 
 }
